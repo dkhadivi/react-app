@@ -21,9 +21,9 @@
     <li><a href="#sourceMaps">Source Maps</a></li>
     <li><a href="#RefactorWebpackConfig">Refactor the Webpack Configuration File</a></li>
     <li><a href="#InstallCSSAndSassPkgs">Install CSS and Sass Packages</a></li>
+    <li><a href="#InstallReactPkgs">Install the React Packages</a></li>
 
-
-    <br/><li><a href="#InstallReactPkgs">Install the React Packages</a></li>
+    <br/>
     <li><a href="#ConfigWebpack">Configure Webpack</a></li>
     <li><a href="#InstallTypescriptPkgs">Install the Typescript Packages</a></li>
     <li><a href="#CreateReactApp">Create the React App</a></li>
@@ -485,9 +485,14 @@ npm i --save-dev @babel/preset-env
 
 ...
 {
-    test: /\.js$/,
+    test: /\.(js)x?$/,
     exclude: /node_modules/,
-    use: "babel-loader"
+    loader: "babel-loader",
+    options: {
+        presets: [
+            "@babel/preset-env"
+        ],
+    },
 }
 </pre>
 
@@ -789,26 +794,6 @@ npm run start
 </ol>
 </ol>
 
-<p>Continue... 44:00</p>
-
-<h2 id="TestApp-1">Test the Application - 1</h2>
-
-<p>Let's test the application with the webpack-dev-server. Open a Command Prompt and navigate to the project root folder. Run the <emph>devserver</emph> script as follows:</li>
-
-<pre class="code">
-npm run devserver
-</pre>
-
-<p>The page opens automatically as shown below.</p>
-
-<p><img src="./media/InstallationAndSetup-01x.jpg" alt="Home page"></p>
-
-<p>Notes:</p>
-<ul>
-    <li>Webpack-dev-server runs everything in memory. Nothing is deployed to any folders.</li>
-</ul>
-</ol>
-
 <h2 id="InstallReactPkgs">Install the React Packages</h2>
 
 <p>Open a Command Prompt and navigate to the project's root folder.</p>
@@ -826,19 +811,185 @@ npm i --save react
 npm i --save react-dom
 </pre>
 
-    <li>Install the <a href="https://www.npmjs.com/package/@types/react" target="_blank">@types/react</a> package.</li>
+<li>Install the <a href="https://www.npmjs.com/package/@babel/preset-react" target="_blank">@babel/preset-react</a> package. A set of plugins used to support React features.</li>
 
 <pre class="code">
-npm i --save-dev @types/react
+npm i --save-dev @babel/preset-react
 </pre>
 
-    <li>Install the <a href="https://www.npmjs.com/package/@types/react" target="_blank">@types/react-dom</a> package.</li>
+<li>Add the highlighted code to the <emph>babel.config.js</emph> file.</li>
 
 <pre class="code">
-npm i --save-dev @types/react-dom
+<heading>babel.config.js</heading>
+
+{
+    presets: [
+        "@babel/preset-env",
+        "@babel/preset-react"
+    ]
+}
 </pre>
+
+<li>Add the highlighted code to the <emph>babel-loader</emph> rule in the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+{
+    test: /\.(js)x?$/,
+    exclude: /node_modules/,
+    loader: "babel-loader",
+    options: {
+        presets: [
+            "@babel/preset-env",
+            <emph>"@babel/preset-react"</emph>
+        ],
+    },
+}
+</pre>
+
+<li>Add the following section to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+resolve: {
+    extensions: [".js", ".jsx"],
+}
+</pre>
+
+<li>Replace the <emph>src\index.js</emph> content with the following.</li>
+
+<pre class="code">
+<heading>index.js</heading>
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './components/App';
+
+const root = ReactDOM.createRoot(
+    document.getElementById('root')
+);
+
+root.render(
+    &lt;React.StrictMode&gt;
+        &lt;App /&gt;
+    &lt;/React.StrictMode&gt;
+);
+</pre>
+
+<li>Create the <emph>src\components</emph> folder.</li>
+
+<pre class="code">
+cd src
+mkdir components
+</pre>
+
+<li>Create the <emph>src\components\App.jsx</emph> file with the following content.</li>
+
+<pre class="code">
+<heading>App.jsx</heading>
+
+import React from 'react';
+import '../styles/main.scss';
+
+const App = () =&gt; {
+    return (
+        &lt;div className="app"&gt;
+            &lt;div className="app__header"&gt;
+                &lt;h1 className="app__header-title"&gt;React App&lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+}
+
+export default App;
+</pre>
+
+<li>Create the <emph>src\styles\components</emph> folder.</li>
+
+<li>Create the <emph>src\styles\components\App.scss</emph> file with the following content:</li>
+
+<pre class="code">
+<heading>App.scss</heading>
+
+.app {
+    height: 100vh;
+    background-color: variables.$color-gray-lt;
+
+    &__header {
+        padding: 1rem;
+        background-color: variables.$color-blue;
+        border-bottom: .2rem solid variables.$color-black;
+
+        display: flex;
+        flex-direction: rows;
+    }
+
+    &__header-title {
+        font-size: 4rem;
+        letter-spacing: .2rem;
+        color: variables.$color-white;
+    }
+
+    &__header-icon {
+        width: 5rem;
+        margin: 0 2rem 0 0;
+    }
+}
+</pre>
+
+<li>Add the highlighted code to the <emph>src\styles\main.scss</emph> file.</li>
+
+<pre class="code">
+<heading>main.scss</heading>
+
+@use './variables';
+
+@import './typography';
+<emph>@import './components/App';</emph>
+...
+</pre>
+
+<li>Remove the striked-out code and add the highlighed code to the <emph>dist\index.html</emph> file.</li>
+
+<pre class="code">
+<heading>index.html</heading>
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;React App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    <strike>&lt;h1&gt;React App&lt;/h1&gt;</strike>
+    <emph>&lt;div id="root"&gt;&lt;/div&gt;</emph>
+    &lt;script src="./main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<li>Test the application:</li>
+
+<ol type="a">
+    <li>Run the webpack server:</li>
+
+<pre class="code">
+npm run start
+</pre>
+
+<li>In a browser page navigate to <emph>http://localhost:4000</emph>. You can see the React <emph>App</emph> component is rendering with it's styles.</li>
+
+<p><img src="./media/InstallationAndSetup-13.jpg" alt="New Github repository."></p>
+</ol>
 </ol>
 
+<p>Continue... 56:15</p>
 
 
 
@@ -1067,7 +1218,7 @@ const App: React.FC = (): JSX.Element =&gt; {
     return (
         &lt;div&gt;
             &lt;div&gt;
-                &lt;h1&gt;Practical React&lt;/h1&gt;
+                &lt;h1&gt;React App&lt;/h1&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     )

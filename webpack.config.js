@@ -27,9 +27,15 @@ module.exports = (env, argv) => {
         module: {
             rules: [
                 {
-                    test: /\.js$/,
+                    test: /\.(js)x?$/,
                     exclude: /node_modules/,
-                    use: "babel-loader"
+                    loader: "babel-loader",
+                    options: {
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react"
+                        ],
+                    },
                 },
                 {
                     test: /\.s[ac]ss$/i,
@@ -61,6 +67,9 @@ module.exports = (env, argv) => {
                 chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
             })
         ],
+        resolve: {
+            extensions: [".js", ".jsx"],
+        },
         devServer: {
             static: {
                 directory: path.join(__dirname, 'dist'),

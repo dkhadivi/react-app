@@ -1,15 +1,13 @@
-import './styles/main.scss';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './components/App';
 
-const contact = {
-    name: "Jane",
-    email: "jsmith@gmail.com",
-    age: 26
-};
+const root = ReactDOM.createRoot(
+    document.getElementById('root')
+);
 
-const employee = {
-    ...contact,
-    salary: 50000
-};
-
-console.log(contact);
-console.log(employee);
+root.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);
