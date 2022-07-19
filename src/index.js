@@ -1,3 +1,5 @@
+import './styles/main.scss';
+
 const contact = {
     name: "Jane",
     email: "jsmith@gmail.com",

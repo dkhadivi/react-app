@@ -1,0 +1,28 @@
+@use './variables';
+
+@import './typography';
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    // This defines what 1rem is.
+    font-size: 62.5%; // 0.625 x 16px = 10px.
+}
+
+body {
+    p {
+        padding: 1rem;
+    }
+
+    box-sizing: border-box;
+    background-color: variables.$color-white;
+    font-family: variables.$font-main;
+    font-size: 1.4rem;
+    overflow-x: hidden;
+}

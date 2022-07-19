@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/app.css">
+    <title>Installation &amp; Setup</title>
+</head>
+<body>
+
+<h1>Installation &amp; Setup<span>React App</span></h1>
+
+<ul class="index">
+    <li><a href="#HostIsGithub">Host the App in Github</a></li>
+    <li><a href="#CreateProject">Create the Project</a></li>
+    <li><a href="#InstallWebpackPkgs">Install the Webpack Packages</a></li>
+    <li><a href="#CreateWebpackDevServerPkgs">Install the Webpack-dev-server packages</a></li>
+    <li><a href="#CrAppEntry">Create the App Entry</a></li>
+    <li><a href="#InstallBabelPkgs">Install the babel Packages</a></li>
+    <li><a href="#sourceMaps">Source Maps</a></li>
+    <li><a href="#RefactorWebpackConfig">Refactor the Webpack Configuration File</a></li>
+    <li><a href="#InstallCSSAndSassPkgs">Install CSS and Sass Packages</a></li>
+
+
+    <br/><li><a href="#InstallReactPkgs">Install the React Packages</a></li>
+    <li><a href="#ConfigWebpack">Configure Webpack</a></li>
+    <li><a href="#InstallTypescriptPkgs">Install the Typescript Packages</a></li>
+    <li><a href="#CreateReactApp">Create the React App</a></li>
+
+    <li><a href="#TestApp-1">Test the Application - 1</a></li>
+    <li><a href="#TestApp-2">Test the Application - 2</a></li>
+    <li><a href="#FontSupport">Install Font Support</a></li>
+    <li><a href="#TestApp-3">Test the Application - 3</a></li>
+    <li><a href="#ImageSupport">Install Image Support</a></li>
+    <li><a href="#TestApp-4">Test the Application - 4</a></li>
+    <li><a href="#InstallHTMLFileCopy">Install HTML File Copy Support</a></li>
+    <li><a href="#TestApp-5">Test the Application - 5</a></li>
+</ul>
+
+<h2 id="HostIsGithub">Host the App in Github</h2>
+
+<p>Open a Command Prompt and navigate to the folder under which you want to create this project. </p>
+
+<ol>
+    <li>Create the project root folder and navigate into it.</li>
+
+<pre class="code">
+mkdir react-app
+cd react-app
+</pre>
+
+<li>Login to your <emph><a href="https://github.com/" target="_blank">Github account</a></emph>.</li>
+
+<li>Click the add icon (plus sign) and select <b>New Repository</b>.</li>
+
+<p><img src="./media/InstallationAndSetup-01.jpg" alt="New Github repository."></p>
+
+<li>Add <emph>react-app</emph> for <emph>Repository name</emph>, and <emph>React application template</emph> for <emph>Description</emph>. Leave the rest of the settings as they are. Click <emph>Create repository</emph>.</li>
+
+<p><img src="./media/InstallationAndSetup-02.jpg" alt="New Github repository."></p>
+
+<li>Click the copy icon to copy the following commands.</li>
+
+<p><img src="./media/InstallationAndSetup-03.jpg" alt="New Github repository."></p>
+
+<li>Navigate to the project root folder. Disable the SSL verify by typing the following command.</li>
+
+<pre class="code">
+git config http.sslVerify false
+</pre>
+
+<p>Otherwise, you'll get this error when the <emph>git push</emph> command is executed below.</p>
+
+<pre class="code">
+fatal: unable to access 'https://github.com/dkhadivi/react-app.git/': SSL certificate problem: self signed certificate in certificate chain
+</pre>
+
+<p>Notes:</p>
+<ul>
+    <li>You can turn the SSL certificate check globally but this is considered a security risk and should be implemented only temporarily.</li>
+
+<pre class="code">
+git config --global http.sslVerify false
+</pre>
+</ul>
+
+<li>In project's root folder paste the Github commands that have been copied (they are shown below). Each command gets executed one after the other. Press Enter on the last command.</li>
+
+<pre class="code">
+echo "# react-app" &gt;&gt; README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/dkhadivi/react-app.git
+git push -u origin main
+</pre>
+
+<li>You'll be asked in a browser page to login either using the browser or code. Choose Login using the browser. Enter your password. You're informed that the authentication has succeeded. Click on the project. You see that the first commit has been made.</li>
+
+<p><img src="./media/InstallationAndSetup-04.jpg" alt="New Github repository."></p>
+
+<li>Create the <emph>.gitignore</emph> file in project's root folder with the following content, which prevents the tracking of files in the <emph>node_modules</emph> folder:
+
+<pre class="code">
+<heading>.gitignore</heading>
+
+node_modules
+</pre>
+</ol>
+
+<h2 id="CreateProject">Create the Project</h2>
+
+<p>Continue from the previous</p>
+
+<ol>
+    <li>Make sure <a href="https://nodejs.org/en/" target="_blank">Node.js</a> is installed on your computer. The following command displays the version: v14.17.6.</li>
+
+<pre class="code">
+node -v
+</pre>
+
+    <p>The NPM (Node Package Manager) is installed with Node.js. The following command displays the version: 6.14.15.</p>
+
+<pre class="code">
+npm -v
+</pre>
+
+    <li>Create the project file.</li>
+
+<pre class="code">
+npm init -y
+</pre>
+
+<li>Reduce the <emph>package.json</emph> file by removing all the properties except the following:</li>
+
+<pre class="code">
+<heading>package.json</heading>
+
+{
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
+}
+</pre>
+</ol>
+
+<h2 id="InstallWebpackPkgs">Install the Webpack Packages</h2>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+    <li>Install the <a href="https://www.npmjs.com/package/webpack" target="_blank">webpack</a> package. This is the module bundler.</li>
+
+<pre class="code">
+npm i --save-dev webpack
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/webpack-cli" target="_blank">webpack-cli</a> package.</li>
+
+<pre class="code">
+npm i --save-dev webpack-cli
+</pre>
+</ol>
+
+<h2 id="CreateWebpackDevServerPkgs">Install the Webpack-dev-server packages</h2>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+    <li>Install the <a href="https://www.npmjs.com/package/webpack-dev-server" target="_blank">webpack-dev-server</a> package.</li>
+
+<pre class="code">
+npm i --save-dev webpack-dev-server
+</pre>
+
+<li>Add the following script to the <emph>package.json</emph> file. For more information see <emph><a href="https://webpack.js.org/configuration/dev-server/" target="_blank"> webpack - DevServer</a></emph>.</li>
+
+<pre class="code">
+"start": "webpack serve --config webpack.config.js --mode development",
+"build-dev": "webpack --mode development",
+"build-prod": "webpack --mode production",
+"watch": "webpack --watch"
+</pre>
+
+<li>Type the following:</li>
+
+<pre class="code">
+npm i
+</pre>
+
+<p>You see the following warnings:</p>
+
+<p><img src="./media/InstallationAndSetup-14.jpg" alt="New Github repository."></p>
+
+<p>Add the following highlighted entry to get rid of the above warnings. Also we don't want to accidentally publish this file.</p>
+
+<pre class="code">
+<heading>package.json</heading>
+
+...
+"private": true,
+</pre>
+
+<li>Create the webpack configuration file <emph>webpack.config.js</emph>.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+const path = require('path');
+
+module.exports = {
+    mode: "development",
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
+        compress: true,
+        port: 4000,
+        hot: true
+    },
+};
+</pre>
+
+<p>Notes:</p>
+<ul>
+    <li><emph>mode: 'development'</emph> can serve as the default value for <emph>mode</emph> for the <emph>webpack</emph> command. The one specified in the <emph>--mode</emph> parameter in the <emph>package.json</emph> scripts overrides this property.</li>
+
+    <li><emph>static</emph> specifies the location for static content.</li>
+
+    <li><emph>hot: true</emph> enabled hot reloading. You can also use the <emph>--hot</emph> flag to the <emph>webpack</emph> command.</li>
+</ul>
+</ol>
+
+<h2 id="CrAppEntry">Create the App Entry</h2>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+    <li>Create the <emph>src</emph> folder.</li>
+
+    <li>Create the <emph>src\index.js</emph> file. This is where Webpack looks by default without a configuration file.</li>
+
+<pre class="code">
+<heading>index.js</heading>
+
+const contact = {
+    name: "Jane",
+    email: "jsmith@gmail.com",
+    age: 26
+};
+
+console.log(contact);
+</pre>
+
+<li>Build the application. Type the following in project root folder.</li>
+
+<pre class="code">
+npm run build-dev
+</pre>
+
+<p>The build worked. The <emph>dist</emph> folder is created and the <emph>main.js</emph> file is emitted to it.</p>
+
+<p><img src="./media/InstallationAndSetup-15.jpg" alt="New Github repository."></p>
+
+<p>The content of <emph>main.js</emph> file in development is quite large.</p>
+
+<pre class="code">
+<heading>main.js</heading>
+
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() =&gt; { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ (() =&gt; {
+
+eval("const contact = {\r\n    name: \"Jane\",\r\n    email: \"jsmith@gmail.com\",\r\n    age: 26\r\n};\r\n\r\nconsole.log(contact);\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./src/index.js"]();
+/******/
+/******/ })()
+;
+</pre>
+
+<li>Shorten the output by adding the following entry to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+devtool: false,
+</pre>
+
+<li>Rebuild the application. Type the following in project root folder.</li>
+
+<pre class="code">
+npm run build-dev
+</pre>
+
+<p>The content of <emph>main.js</emph> file in development is quite large.</p>
+
+<pre class="code">
+<heading>main.js</heading>
+
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!**********************!*\
+    !*** ./src/index.js ***!
+    \**********************/
+const contact = {
+    name: "Jane",
+    email: "jsmith@gmail.com",
+    age: 26
+};
+
+console.log(contact);
+/******/ })()
+;
+</pre>
+
+<li>Run the application</li>
+
+<pre class="code">
+node dist\main
+</pre>
+
+<p>Output:</p>
+
+<pre class="code">
+{ name: 'Jane', email: 'jsmith@gmail.com', age: 26 }
+</pre>
+
+<li>Add the <emph>dist</emph> folder to the <emph>.gitignore</emph> file. We don't want to pull this folder from github. We want to build this folder and it's content fresh.</li>
+
+<pre class="code">
+<heading>.gitignore</heading>
+
+<emph>dist</emph>
+node_modules
+</pre>
+
+<li>Create the <emph>dist\index.html</emph> file with the following content.</li>
+
+<pre class="code">
+<heading>index.html</heading>
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;React App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;React App&lt;/h1&gt;
+
+    &lt;script src="./main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Notes:</p>
+<ul>
+    <li>Type <emph>html:5</emph> and Enter in VSCode to create an HTML boilerplate (for more info see <emph><a href="https://www.youtube.com/watch?v=PWlIyQ09O0o" target="_blank" rel="noopener noreferrer">this</a></emph>).</li>
+</ul>
+
+<li>Test the application:</li>
+
+<ol type="a">
+    <li>Run the webpack server:</li>
+
+<pre class="code">
+npm run start
+</pre>
+
+<li>In a browser page navigate to <emph>http://localhost:4000</emph>, which was copied from webpack's output. We can see our page.</li>
+
+<p><img src="./media/InstallationAndSetup-05.jpg" alt="New Github repository."></p>
+
+<p>And the <emph>main.js</emph> file's output:</p>
+
+<p><img src="./media/InstallationAndSetup-06.jpg" alt="New Github repository."></p>
+</ol>
+
+<li>The above Console output also shows that "Live Reloading" is enabled. To test this. Replace the content of <emph>src\index.js</emph> with the following.</li>
+
+<pre class="code">
+<heading>index.js</heading>
+
+const contact = {
+    name: "Jane",
+    email: "jsmith@gmail.com",
+    age: 26
+};
+
+const employee = {
+    ...contact,
+    salary: 50000
+};
+
+console.log(contact);
+console.log(employee);
+</pre>
+
+<p>The Console output shows our change after the page is refreshed automatically.</p>
+
+<p><img src="./media/InstallationAndSetup-07.jpg" alt="New Github repository."></p>
+
+<p>Notes:</p>
+<ul>
+<li><emph>Important</emph>: The <emph>build\main.js</emph> content is still the old content and has not be refreshed (see below). The Webpack-dev-server stores everything in memory and does not emit anything to the <emph>dist</emph> folder.</li>
+
+<pre class="code">
+<heading>main.js</heading>
+
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!**********************!*\
+    !*** ./src/index.js ***!
+    \**********************/
+const contact = {
+    name: "Jane",
+    email: "jsmith@gmail.com",
+    age: 26
+};
+
+console.log(contact);
+/******/ })()
+;
+</pre>
+
+<li>To rebuild the content of <emph>dist</emph> folder, run the <emph>build-dev</emph> script.</li>
+</ul>
+</ol>
+
+<h2 id="InstallBabelPkgs">Install the babel Packages</h2>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+<li>Install the <a href="https://www.npmjs.com/package/babel-loader" target="_blank">babel-loader</a> package.</li>
+
+<pre class="code">
+npm i --save-dev babel-loader
+</pre>
+
+    <li>Install the <a href="https://www.npmjs.com/package/@babel/core" target="_blank">@babel/core</a> package.</li>
+
+<pre class="code">
+npm i --save-dev @babel/core
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/@babel/preset-env" target="_blank">@babel/preset-env</a> package.</li>
+
+<pre class="code">
+npm i --save-dev @babel/preset-env
+</pre>
+
+<li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    use: "babel-loader"
+}
+</pre>
+
+<li>Create the <emph>babel.config.js</emph> file in project root folder with following content:</li>
+
+<pre class="code">
+<heading>babel.config.js</heading>
+
+module.exports = {
+    presets: ['@babel/preset-env']
+}
+</pre>
+
+<li>Test the application:</li>
+
+<ol type="a">
+    <li>Run the webpack server:</li>
+
+<pre class="code">
+npm run start
+</pre>
+
+<li>In a browser page navigate to <emph>http://localhost:4000</emph>. We can see our page with Babel working.</li>
+
+<p><img src="./media/InstallationAndSetup-08.jpg" alt="New Github repository."></p>
+</ol>
+</ol>
+
+<h2 id="sourceMaps">Source Maps</h2>
+
+<p>Continue form the previous step. Let's see how to use the source maps feature of Webpack.</p>
+
+<ol>
+<li>Run the webpack server:</li>
+
+<pre class="code">
+npm run start
+</pre>
+
+<li>In a browser page navigate to <emph>http://localhost:4000</emph>. Open the Developer Tools. You can see that we have access to the final deployed <emph>main.js</emph> file.</li>
+
+<p><img src="./media/InstallationAndSetup-09.jpg" alt="New Github repository."></p>
+
+<li>Change the <emph>devtool</emph> property value from <emph>"source-map"</emph>.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+devtool: "source-map",
+</pre>
+
+<li>Stop and restart the webpack server:</li>
+
+<pre class="code">
+npm run start
+</pre>
+
+<li>In a browser page navigate to <emph>http://localhost:4000</emph>. Open the Developer Tools. You can see that we have access to the final deployed <emph>main.js</emph> file as well as the source file under the <emph>webpack</emph> node.</li>
+
+<p><img src="./media/InstallationAndSetup-10.jpg" alt="New Github repository."></p>
+
+<p>If you click on <emph>src\index.js</emph>, you have access to the original source code.
+
+<p><img src="./media/InstallationAndSetup-11.jpg" alt="New Github repository."></p>
+</ol>
+
+<h2 id="RefactorWebpackConfig">Refactor the Webpack Configuration File</h2>
+
+<p>Continue form the previous step. Let's refactor the <emph>webpack.config.js</emph> file to switch more easily between modes and also to display information to the Console.</p>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+const path = require('path');
+
+module.exports = (env, argv) =&gt; {
+    <com>// The mode is passed in as argument. Default to 'development'.</com>
+    const mode = argv.mode || 'development';
+
+    <com>// Define the current environment based on the "mode" parameter.</com>
+    const isDevelopment = mode !== 'production';
+
+    <com>// Define the port # based on the environment.</com>
+    const port = (mode !== 'production') ? 4100 : 4000;
+
+    <com>// Define the deployment folder based on the environment.</com>
+    const deployFolder = (mode !== 'production') ? 'public' : 'dist';
+
+    console.log('\n&gt;&gt;&gt;&gt; Begin ENV');
+    console.log('    argv.mode    : ' + mode);
+    console.log('    isDevelopment: ' + isDevelopment);
+    console.log('    deployFolder : ' + deployFolder);
+    console.log('    port         : ' + port);
+    console.log('&gt;&gt;&gt;&gt; End ENV\n');
+
+    return {
+        mode: mode,
+        devtool: "source-map",
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    use: "babel-loader"
+                }
+            ]
+        },
+        devServer: {
+            static: {
+                directory: path.join(__dirname, 'dist'),
+            },
+            compress: true,
+            port: 4000,
+        },
+    };
+};
+</pre>
+
+<p>There's no change in functionality.</p>
+
+<h2 id="InstallCSSAndSassPkgs">Install CSS and Sass Packages</h2>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+    <li>Install the <a href="https://www.npmjs.com/package/css-loader" target="_blank">css-loader</a> package.</li>
+
+<pre class="code">
+npm i --save-dev css-loader
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/style-loader" target="_blank">style-loader</a> package.</li>
+
+<pre class="code">
+npm i --save-dev style-loader
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/mini-css-extract-plugin" target="_blank">mini-css-extract-plugin</a> package.</li>
+
+<pre class="code">
+npm i --save-dev mini-css-extract-plugin
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/sass" target="_blank">sass</a> package.</li>
+
+<pre class="code">
+npm i --save-dev sass
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/sass-loader" target="_blank">sass-loader</a> package.</li>
+
+<pre class="code">
+npm i --save-dev sass-loader
+</pre>
+
+<li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+...
+
+{
+    test: /\.s[ac]ss$/i,
+    use: [
+        <com>// Creates `style` nodes from JS strings</com>
+        argv.mode !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+        <com>// Translates CSS into CommonJS</com>
+        {
+            loader: "css-loader",
+            options: {
+                modules: false,
+            }
+        },
+        <com>// Compiles Sass to CSS</com>
+        {
+            loader: "sass-loader",
+            options: {
+                <com>// Prefer `dart-sass`</com>
+                implementation: require("sass"),
+            },
+        }
+    ],
+}
+</pre>
+
+<li>Add the following plugin to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+
+plugins: [
+    new MiniCssExtractPlugin({
+        filename: isDevelopment ? '[name].css' : '[name].[hash].css',
+        chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
+    })
+]
+</pre>
+
+<li>Create the <emph>src\styles</emph> folder.</li>
+
+<li>Create the <emph>src\styles\abstracts</emph> folder.</li>
+
+<li>Create the <emph>src\styles\abstracts\_variables.scss</emph> file with the following content</li>
+
+<pre class="code">
+<heading>_variables.scss</heading>
+
+<com>// Colors.</com>
+$color-black: #202020;
+$color-blue: #2F74C0;
+$color-gray-lt: #E9E9E9;
+$color-white: #FFFFFF;
+
+$font-main: sans-serif;
+</pre>
+
+<li>Create the <emph>src\styles\base</emph> folder.</li>
+
+<li>Create the <emph>src\styles\base\_base.scss</emph> file with the following content</li>
+
+<pre class="code">
+<heading>_base.scss</heading>
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    <com>// This defines what 1rem is.</com>
+    font-size: 62.5%; <com>// 0.625 x 16px = 10px.</com>
+}
+
+body {
+    p {
+        padding: 1rem;
+    }
+
+    box-sizing: border-box;
+    background-color: $color-white;
+    font-family: $font-main;
+    font-size: 1.4rem;
+    overflow-x: hidden;
+}
+</pre>
+
+<li>Create the <emph>src\styles\base\_typography.scss</emph> file with the following content:</li>
+
+<pre class="code">
+<heading>_typography.scss</heading>
+
+h1 {
+    color: $color-blue;
+    font-size: 4rem;
+    letter-spacing: .2rem;
+    padding: 2rem;
+}
+</pre>
+
+<li>Create the <emph>src\styles\main.scss</emph> file with the following content:</li>
+
+<pre class="code">
+<heading>main.scss</heading>
+
+@import 'abstracts/variables';
+@import 'base/base';
+@import 'base/typography';
+</pre>
+
+<li>Add the following entry to the <emph>src\index.js</emph> file. This is entry point for webpack to pick up an process all the Sass files:</li>
+
+<pre class="code">
+<heading>index.js</heading>
+
+import './styles/main.scss';
+...
+</pre>
+
+<li>Test the application:</li>
+
+<ol type="a">
+    <li>Run the webpack server:</li>
+
+<pre class="code">
+npm run start
+</pre>
+
+<li>In a browser page navigate to <emph>http://localhost:4000</emph>. You can see the Sass style applying to the H1 tag.</li>
+
+<p><img src="./media/InstallationAndSetup-12.jpg" alt="New Github repository."></p>
+</ol>
+</ol>
+
+<p>Continue... 44:00</p>
+
+<h2 id="TestApp-1">Test the Application - 1</h2>
+
+<p>Let's test the application with the webpack-dev-server. Open a Command Prompt and navigate to the project root folder. Run the <emph>devserver</emph> script as follows:</li>
+
+<pre class="code">
+npm run devserver
+</pre>
+
+<p>The page opens automatically as shown below.</p>
+
+<p><img src="./media/InstallationAndSetup-01x.jpg" alt="Home page"></p>
+
+<p>Notes:</p>
+<ul>
+    <li>Webpack-dev-server runs everything in memory. Nothing is deployed to any folders.</li>
+</ul>
+</ol>
+
+<h2 id="InstallReactPkgs">Install the React Packages</h2>
+
+<p>Open a Command Prompt and navigate to the project's root folder.</p>
+
+<ol>
+    <li>Install the <a href="https://www.npmjs.com/package/react" target="_blank">react</a> package.</li>
+
+<pre class="code">
+npm i --save react
+</pre>
+
+    <li>Install the <a href="https://www.npmjs.com/package/react-dom" target="_blank">react-dom</a> package.</li>
+
+<pre class="code">
+npm i --save react-dom
+</pre>
+
+    <li>Install the <a href="https://www.npmjs.com/package/@types/react" target="_blank">@types/react</a> package.</li>
+
+<pre class="code">
+npm i --save-dev @types/react
+</pre>
+
+    <li>Install the <a href="https://www.npmjs.com/package/@types/react" target="_blank">@types/react-dom</a> package.</li>
+
+<pre class="code">
+npm i --save-dev @types/react-dom
+</pre>
+</ol>
+
+
+
+
+<h2 id="ConfigWebpack">Configure Webpack</h2>
+
+<p>Lets configure Webpack as though Typescript is already in use. We will install Typescript shortly.
+
+<ol>
+    <li>Create the <emph>webpack.config.js</emph> file in project root folder with the following content:</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+const path = require('path');
+
+module.exports = (env, argv) =&gt; {
+    <com>// Define the current environment based on the "mode" parameter.</com>
+    const isDevelopment = argv.mode !== 'production';
+
+    <com>// Define the port # based on the environment.</com>
+    const port = (argv.mode !== 'production') ? 4100 : 4000;
+
+    <com>// Define the deployment folder based on the environment.</com>
+    const deployFolder = (argv.mode !== 'production') ? 'public' : 'build';
+
+    console.log('\n&gt;&gt;&gt;&gt; Begin ENV')
+    console.log('    argv.mode    : ' + argv.mode)
+    console.log('    isDevelopment: ' + isDevelopment)
+    console.log('    deployFolder : ' + deployFolder)
+    console.log('    port         : ' + port)
+    console.log('&gt;&gt;&gt;&gt; End ENV\n')
+
+    return {
+        context: path.resolve(__dirname, 'src'),
+        devtool: 'inline-source-map',
+        entry: {
+            app: './index.tsx'
+        },
+        mode: "development",
+        output: {
+            path: path.resolve(__dirname, deployFolder),
+            filename: 'assets/js/[name].bundle.js',
+            publicPath: '/',
+        },
+        devServer: {
+            static: {
+                directory: path.join(__dirname, deployFolder),
+            },
+            open: true,
+            compress: true,
+            port: port
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.(ts|js)x?$/,
+                    exclude: /node_modules/,
+                    loader: "babel-loader",
+                    options: {
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react",
+                            "@babel/preset-typescript",
+                        ],
+                    },
+                },
+                {
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
+                    exclude: /node_modules/,
+                }
+            ],
+        },
+        resolve: {
+            extensions: [".ts", ".tsx", ".js", ".jsx"],
+        }
+    }
+}
+</pre>
+
+<p>Notes:</p>
+<ul>
+    <li><emph>mode: "development"</emph> property serves as the default mode if you pass the mode as an argument to the webpack command, as shown in the next step in the <emph>package.json</emph> scripts. Example:</li>
+
+<pre class="code">
+build-dev": "webpack <emph>--mode development</emph>
+</pre>
+</ul>
+
+    <li> Add the following scripts to <emph>package.json</emph> file.</li>
+
+<pre class="code">
+"scripts": {
+    "build-prod": "webpack --mode production",
+    "build-dev": "webpack --mode development"
+}
+</pre>
+
+<p>Notes:</p>
+<ul>
+    <li>The <emph>build-prod</emph> script builds the application for production.</li>
+
+    <li>The <emph>build-dev</emph> script builds the application for development.</li>
+
+    <li>The <emph>--mode</emph> argument is passed to the <emph>webpack.config.js</emph> file above as <emph>argv.mode</emph> property</li>
+</ul>
+</ol>
+
+<h2 id="InstallTypescriptPkgs">Install the Typescript Packages</h2>
+
+<p>Open a Command Prompt and navigate to the project's root folder.</p>
+
+<ol>
+    <li>Install the <a href="https://www.npmjs.com/package/typescript" target="_blank">typescript</a> package.</li>
+
+<pre class="code">
+npm i --save-dev typescript
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/ts-loader" target="_blank">ts-loader</a> package.</li>
+
+<pre class="code">
+npm i --save-dev ts-loader
+</pre>
+
+<li>Create the <emph>index.d.ts</emph> file in the project root folder with the following content:</li>
+
+<pre class="code">
+<heading>index.d.ts</heading>
+
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.svg';
+declare module '*.gif';
+</pre>
+
+<li>Create the <emph>tsconfig.json</emph> in the project root folder with the following content:</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "jsx": "react",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "module": "es6",
+        "moduleResolution": "node",
+        "noEmit": false,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        <com>//"outDir": "./public/",</com>
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "es5",
+    },
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "**/*.test.ts"
+    ],
+    "include": [
+        "src",
+        "index.d.ts"
+    ]
+}
+</pre>
+</ol>
+
+<h2 id="CreateReactApp">Create the React App</h2>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+    <li>Create the <emph>src</emph> folder.</li>
+
+<pre class="code">
+mkdir src
+</pre>
+
+    <li>Create the <emph>src\index.tsx</emph> file with the following content.</li>
+
+<pre class="code">
+<heading>index.tsx</heading>
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './components/App';
+
+const root: ReactDOM.Root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+);
+
+root.render(
+    &lt;React.StrictMode&gt;
+        &lt;App /&gt;
+    &lt;/React.StrictMode&gt;
+);
+</pre>
+
+<li>Create the <emph>src\components</emph> folder.</li>
+
+<pre class="code">
+    cd src
+    mkdir components
+</pre>
+
+<li>Create the <emph>src\components\App.tsx</emph> file with the following content.</li>
+
+<pre class="code">
+<heading>App.tsx</heading>
+
+import React from 'react';
+
+const App: React.FC = (): JSX.Element =&gt; {
+    return (
+        &lt;div&gt;
+            &lt;div&gt;
+                &lt;h1&gt;Practical React&lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default App;
+</pre>
+
+<li>Create the top-level page</li>
+
+<ol type="a">
+    <li>Create the<emph>public</emph> folder.</li>
+
+<pre class="code">
+    mkdir public
+</pre>
+
+<li>Create the <emph>public\index.html</emph> file with the following content.</li>
+</ol>
+
+<pre class="code">
+<heading>index.html</heading>
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Practical React&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+
+    <com>&lt;!-- The bundle-name should be same as you defined in webpack config file --&gt;</com>
+    &lt;script src="./assets/js/app.bundle.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</ol>
+</ol>
+
+
+<h2 id="FontSupport">Install Font Support</h2>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+    <li>Download the Google <a href="https://fonts.google.com/specimen/Roboto" target="_blank">Roboto </a> font family.</li>
+
+    <li>Place the contents of the downloaded zip file in the <emph>src\assets\fonts\Roboto</emph> folder. Create the folder hierarchy.</li>
+
+    <li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+{
+    <com>// Emit all the fonts to the "/assets/fonts/Roboto" folder within the "outputPath" folder.</com>
+    test: /\.(woff(2)?|ttf|eot|otf)$/i,
+    type: 'asset/resource',
+    generator: {
+        filename: './assets/fonts/Roboto/[name][ext]',
+        outputPath: '.',
+    },
+}
+</pre>
+
+<li>Add the following content to the <emph>_variables.scss</emph> file.</li>
+
+<pre class="code">
+<heading>_variables.scss</heading>
+
+...
+<com>// Fonts</com>
+@font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf'), format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+</pre>
+
+<li>Change the <emph>$font-main</emph> variable that's defined in the <emph>_variables.scss</emph> file to the following:</li>
+
+<pre class="code">
+<heading>_variables.scss</heading>
+
+...
+$font-main: 'Roboto', sans-serif;
+</pre>
+</ol>
+
+<h2 id="TestApp-3">Test the Application - 3</h2>
+
+<p>Let's test the application with the webpack-dev-server. Open a Command Prompt and navigate to the project root folder. Run the <emph>devserver</emph> script as follows:</li>
+
+<pre class="code">
+npm run devserver
+</pre>
+
+<p>The page opens automatically as shown below. You can now see the Font applied to the main title.</p>
+
+<p><img src="./media/InstallationAndSetup-03.jpg" alt="Home page with styles"></p>
+</ol>
+
+<h2 id="ImageSupport">Install Image Support</h2>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+    <li>Create <emph>src\assets\media</emph> folder and place the <emph>React-icon.svg</emph> in it.</li>
+
+    <li>Create <emph>src\assets\media\backgrounds</emph> folder and place the <emph>bkg-pattern.jpg</emph> in it.</li>
+
+    <li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+{
+    <com>// Media assets.</com>
+    <com>// Emit all the images preserving the folder source image folder structure.</com>
+    test: /\.(png|jpe?g|gif|svg|webp)$/i,
+    type: 'asset/resource',
+    generator: {
+        filename: (name) =&gt; {
+            const path = name.filename.split("/").slice(0, -1).join("/");
+            return `${path}/[name][ext]`;
+        },
+    },
+}
+</pre>
+
+<p>Notes:</p>
+<ul>
+    <li>The <emph>generator</emph> property can be a JSON object or a function. We are using a function here in order to tell Webpack to maintain the src image folder structure when it emits the images. I found this solution in the <emph>Preserve subdirectories in webpack 5<</emph> link (see credits below).</li>
+</ul>
+
+<li>Add a React.js icon to the header by adding the highlighted code to the <emph>src\components\App.tsx</emph> file</li>.
+
+<pre class="code">
+<heading>App.tsx</heading>
+
+import React from 'react';
+import '../styles/main.scss';
+<emph>import imageSrc from '../assets/media/React-icon.svg';</emph>
+
+const App: React.FC = (): JSX.Element =&gt; {
+    return (
+        &lt;div className="app"&gt;
+            &lt;div className="app__header"&gt;
+                <emph>&lt;img src={`.${imageSrc}`} className='app__header-icon' alt="React icon" /&gt;</emph>
+                &lt;h1 className="app__header-title"&gt;Practical React&lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default App;
+</pre>
+
+<li>Add a background image <emph>App</emph> component by adding the highlighted styles below to the <emph>src\assets\styles\components\App.scss</emph> file</li>. Comment out the <emph>background-color</emph> style.
+
+<pre class="code">
+<heading>App.scss</heading>
+
+.app {
+    height: 100vh;
+    <emph><com>// background-color: $color-gray-lt;</com>
+    background-image: url('../assets/media/backgrounds/bkg-pattern.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;</emph>
+
+    &__header {
+        padding: 1rem;
+        background-color: $color-blue;
+        border-bottom: .2rem solid $color-black;
+
+        display: flex;
+        flex-direction: rows;
+    }
+
+    &__header-title {
+        font-size: 4rem;
+        letter-spacing: .2rem;
+        color: $color-white;
+    }
+
+    &__header-icon {
+        width: 5rem;
+        margin: 0 2rem 0 0;
+    }
+}
+</pre>
+</ol>
+
+<h2 id="TestApp-4">Test the Application - 4</h2>
+
+<p>Let's test the application with the webpack-dev-server. Open a Command Prompt and navigate to the project root folder. Run the <emph>devserver</emph> script as follows:</li>
+
+<pre class="code">
+npm run devserver
+</pre>
+
+<p>The page opens automatically as shown below. You can see the React.js icon in the header as well as the background image pattern applied to the home page.</p>
+
+<p><img src="./media/InstallationAndSetup-04.jpg" alt="Home page with images"></p>
+</ol>
+
+<h2 id="InstallHTMLFileCopy">Install HTML File Copy Support</h2>
+
+<p>Let's install the capability for Webpack to copy the <emph>index.html</emph> file, which now resides in the <emph>public</emph> folder, from the <emph>src</emph> foder. This way the <emph>src</emph> will contain all the source code.</p>
+
+
+<p>Continue form the previous step.</p>
+
+<ol>
+    <li>Install the <a href="https://www.npmjs.com/package/html-loader" target="_blank">html-loader</a> package.</li>
+
+<pre class="code">
+npm i --save-dev html-loader
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/html-webpack-plugin" target="_blank">html-webpack-plugin</a> package.</li>
+
+<pre class="code">
+npm i -save-dev html-webpack-plugin
+</pre>
+
+<li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+{
+    test: /\.html$/,
+    use: [
+        {
+            loader: "html-loader",
+            options: {
+                minimize: false
+            }
+        }
+    ]
+}
+</pre>
+
+<li>Add the following plugin to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+
+...
+plugins: [
+    ...
+    new HtmlWebPackPlugin({
+        template: './index.html',
+        filename: 'index.html',
+        favicon: './favicon.ico',
+        inject: 'body'
+    })
+]
+</pre>
+
+<li>Place the <emph>favicon.ico</emph> in the <emph>src</emph> folder.</li>
+
+<li>Move the <emph>public\index.html</emph> file to the <emph>src</emph> folder. comment out the JavaScript tag as shown below.</li>
+
+
+<pre class="code">
+<heading>index.html</heading>
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Practical React&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+
+    <com>&lt;!-- The bundle-name should be same as you defined in webpack config file --&gt;</com>
+    <com>&lt;!--&lt;script src="./assets/js/app.bundle.js"&gt;&lt;/script&gt;--&gt;</com>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<li>Delete the <emph>public</emph> folder.</li>
+</ol>
+
+<h2 id="TestApp-5">Test the Application - 5</h2>
+
+<p>Let's test the application with the webpack-dev-server. Open a Command Prompt and navigate to the project root folder. Run the <emph>devserver</emph> script as follows:</li>
+
+<pre class="code">
+npm run devserver
+</pre>
+
+<p>The page opens automatically as shown below and renders as before. The favicon does not display for some reason. Nothing is emitted to any folder. Webpack-dev-server renders everything in memory.</p>
+
+<p><img src="./media/InstallationAndSetup-05.jpg" alt="Home page HTML copied"></p>
+</ol>
+
+
+<p class="credit">
+<a href="https://www.youtube.com/watch?v=TOb1c39m64A" target="_blank">Webpack 5 Full Project Setup</a>
+<br/><a href="https://dev.to/ruppysuppy/create-react-app-from-scratch-like-a-pro-de0" target="_blank">Create React App from Scratch like a Pro</a>
+<br/><a href="https://webpack.js.org/guides/typescript/" target="_blank">Webpack - TypeScript</a>
+<br/><a href="https://www.carlrippon.com/creating-react-and-typescript-apps-with-webpack/" target="_blank">Creating React and TypeScript apps with Webpack</a>
+<br/><a href="https://www.polynique.com/web-development/how-to-add-typescript-to-an-existing-webpack-project/" target="_blank">How to add Typescript to an existing Webpack project</a>
+<br/><a href="https://dev.to/deepanjangh/setting-up-css-and-sass-with-webpack-3cg" target="_blank">Setting up CSS and Sass with Webpack!!</a>
+<br/><a href="https://webpack.js.org/loaders/sass-loader/" target="_blank">Webpack - sass-loader</a>
+<br/><a href="https://webpack.js.org/guides/asset-modules/" target="_blank">Webpack - Asset Modules</a>
+<br/><a href="https://stackoverflow.com/questions/43638454/webpack-typescript-image-import" target="_blank">stack overflow - Webpack & Typescript image import</a>
+<br/><a href="https://survivejs.com/webpack/loading/images/" target="_blank">Loading Images</a>
+<br/><a href="https://stackoverflow.com/questions/66580334/preserve-subdirectories-in-webpack-5" target="_blank">Preserve subdirectories in webpack 5</a>
+<br/>Last revised: 7/18/2022
+</p>
+</body>
+</html>

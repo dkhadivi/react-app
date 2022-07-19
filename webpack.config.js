@@ -1,3 +1,4 @@
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
 
 module.exports = (env, argv) => {
@@ -29,15 +30,44 @@ module.exports = (env, argv) => {
                     test: /\.js$/,
                     exclude: /node_modules/,
                     use: "babel-loader"
+                },
+                {
+                    test: /\.s[ac]ss$/i,
+                    use: [
+                        // Creates `style` nodes from JS strings
+                        argv.mode !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+                        // Translates CSS into CommonJS
+                        {
+                            loader: "css-loader",
+                            options: {
+                                modules: false,
+                            }
+                        },
+                        // Compiles Sass to CSS
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                // Prefer `dart-sass`
+                                implementation: require("sass"),
+                            },
+                        }
+                    ],
                 }
             ]
         },
+        plugins: [
+            new MiniCssExtractPlugin({
+                filename: isDevelopment ? '[name].css' : '[name].[hash].css',
+                chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
+            })
+        ],
         devServer: {
             static: {
                 directory: path.join(__dirname, 'dist'),
             },
             compress: true,
             port: 4000,
+            hot: true
         },
     };
 };
