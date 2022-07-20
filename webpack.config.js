@@ -25,7 +25,7 @@ module.exports = (env, argv) => {
     return {
         context: path.resolve(__dirname, 'src'),
         entry: {
-            app: './index.js'
+            app: './index.tsx'
         },
         mode: mode,
         devtool: false,
@@ -51,9 +51,15 @@ module.exports = (env, argv) => {
                     options: {
                         presets: [
                             "@babel/preset-env",
-                            "@babel/preset-react"
+                            "@babel/preset-react",
+                            "@babel/preset-typescript"
                         ],
                     },
+                },
+                {
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
+                    exclude: /node_modules/,
                 },
                 {
                     test: /\.s[ac]ss$/i,
@@ -114,7 +120,7 @@ module.exports = (env, argv) => {
             })
         ],
         resolve: {
-            extensions: [".js", ".jsx"],
+            extensions: [".js", ".jsx", ".ts", ".tsx"],
         }
     };
 };

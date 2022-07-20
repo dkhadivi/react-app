@@ -25,17 +25,7 @@
     <li><a href="#FontSupport">Install Font Support</a></li>
     <li><a href="#ImageSupport">Install Image Support</a></li>
     <li><a href="#InstallHTMLFileCopy">Install HTML File Copy Support</a></li>
-
-    <br/>
-    <li><a href="#ConfigWebpack">Configure Webpack</a></li>
     <li><a href="#InstallTypescriptPkgs">Install the Typescript Packages</a></li>
-    <li><a href="#CreateReactApp">Create the React App</a></li>
-
-    <li><a href="#TestApp-1">Test the Application - 1</a></li>
-    <li><a href="#TestApp-2">Test the Application - 2</a></li>
-    <li><a href="#TestApp-3">Test the Application - 3</a></li>
-    <li><a href="#TestApp-4">Test the Application - 4</a></li>
-    <li><a href="#TestApp-5">Test the Application - 5</a></li>
 </ul>
 
 <h2 id="HostIsGithub">Host the App in Github</h2>
@@ -1190,8 +1180,6 @@ npm run start
 </ol>
 </ol>
 
-<p>Continue... 1:21:00</p>
-
 <h2 id="InstallHTMLFileCopy">Install HTML File Copy Support</h2>
 
 <p>Let's install the capability for Webpack to copy the <emph>index.html</emph> file, which now resides in the <emph>dist</emph> folder, from the <emph>src</emph> folder. This way the <emph>src</emph> folder will contain all the source code.</p>
@@ -1228,7 +1216,6 @@ plugins: [
 
 <li>Move the <emph>dist\index.html</emph> file to the <emph>src</emph> folder. comment out (or remove) the JavaScript tag as shown below.</li>
 
-
 <pre class="code">
 <heading>index.html</heading>
 
@@ -1254,115 +1241,11 @@ plugins: [
 <li>Delete the <emph>dist</emph> folder.</li>
 </ol>
 
-
-<h2 id="ConfigWebpack">Configure Webpack</h2>
-
-<p>Lets configure Webpack as though Typescript is already in use. We will install Typescript shortly.
-
-<ol>
-    <li>Create the <emph>webpack.config.js</emph> file in project root folder with the following content:</li>
-
-<pre class="code">
-<heading>webpack.config.js</heading>
-
-const path = require('path');
-
-module.exports = (env, argv) =&gt; {
-    <com>// Define the current environment based on the "mode" parameter.</com>
-    const isDevelopment = argv.mode !== 'production';
-
-    <com>// Define the port # based on the environment.</com>
-    const port = (argv.mode !== 'production') ? 4100 : 4000;
-
-    <com>// Define the deployment folder based on the environment.</com>
-    const deployFolder = (argv.mode !== 'production') ? 'public' : 'build';
-
-    console.log('\n&gt;&gt;&gt;&gt; Begin ENV')
-    console.log('    argv.mode    : ' + argv.mode)
-    console.log('    isDevelopment: ' + isDevelopment)
-    console.log('    deployFolder : ' + deployFolder)
-    console.log('    port         : ' + port)
-    console.log('&gt;&gt;&gt;&gt; End ENV\n')
-
-    return {
-        context: path.resolve(__dirname, 'src'),
-        devtool: 'inline-source-map',
-        entry: {
-            app: './index.tsx'
-        },
-        mode: "development",
-        output: {
-            path: path.resolve(__dirname, deployFolder),
-            filename: 'assets/js/[name].bundle.js',
-            publicPath: '/',
-        },
-        devServer: {
-            static: {
-                directory: path.join(__dirname, deployFolder),
-            },
-            open: true,
-            compress: true,
-            port: port
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.(ts|js)x?$/,
-                    exclude: /node_modules/,
-                    loader: "babel-loader",
-                    options: {
-                        presets: [
-                            "@babel/preset-env",
-                            "@babel/preset-react",
-                            "@babel/preset-typescript",
-                        ],
-                    },
-                },
-                {
-                    test: /\.tsx?$/,
-                    use: 'ts-loader',
-                    exclude: /node_modules/,
-                }
-            ],
-        },
-        resolve: {
-            extensions: [".ts", ".tsx", ".js", ".jsx"],
-        }
-    }
-}
-</pre>
-
-<p>Notes:</p>
-<ul>
-    <li><emph>mode: "development"</emph> property serves as the default mode if you pass the mode as an argument to the webpack command, as shown in the next step in the <emph>package.json</emph> scripts. Example:</li>
-
-<pre class="code">
-build-dev": "webpack <emph>--mode development</emph>
-</pre>
-</ul>
-
-    <li> Add the following scripts to <emph>package.json</emph> file.</li>
-
-<pre class="code">
-"scripts": {
-    "build-prod": "webpack --mode production",
-    "build-dev": "webpack --mode development"
-}
-</pre>
-
-<p>Notes:</p>
-<ul>
-    <li>The <emph>build-prod</emph> script builds the application for production.</li>
-
-    <li>The <emph>build-dev</emph> script builds the application for development.</li>
-
-    <li>The <emph>--mode</emph> argument is passed to the <emph>webpack.config.js</emph> file above as <emph>argv.mode</emph> property</li>
-</ul>
-</ol>
+<p>Continue... 1:21:00</p>
 
 <h2 id="InstallTypescriptPkgs">Install the Typescript Packages</h2>
 
-<p>Open a Command Prompt and navigate to the project's root folder.</p>
+<p>Continue from the previous step.</p>
 
 <ol>
     <li>Install the <a href="https://www.npmjs.com/package/typescript" target="_blank">typescript</a> package.</li>
@@ -1375,6 +1258,18 @@ npm i --save-dev typescript
 
 <pre class="code">
 npm i --save-dev ts-loader
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/@babel/preset-typescript" target="_blank">@babel/preset-typescript</a> package.</li>
+
+<pre class="code">
+npm i --save-dev @babel/preset-typescript
+</pre>
+
+<li>Install the <a href="https://www.npmjs.com/package/@types/react-dom" target="_blank">@types/react-dom</a> package.</li>
+
+<pre class="code">
+npm i --save-dev @types/react-dom
 </pre>
 
 <li>Create the <emph>index.d.ts</emph> file in the project root folder with the following content:</li>
@@ -1391,7 +1286,7 @@ declare module '*.gif';
 <li>Create the <emph>tsconfig.json</emph> in the project root folder with the following content:</li>
 
 <pre class="code">
-<heading>webpack.config.js</heading>
+<heading>tsconfig.json</heading>
 
 {
     "compilerOptions": {
@@ -1429,20 +1324,76 @@ declare module '*.gif';
     ]
 }
 </pre>
-</ol>
 
-<h2 id="CreateReactApp">Create the React App</h2>
-
-<p>Continue form the previous step.</p>
-
-<ol>
-    <li>Create the <emph>src</emph> folder.</li>
+    <li>Change the extension of the <emph>entry</emph> property in the <emph>webpack.config.js</emph> file.</li>
 
 <pre class="code">
-mkdir src
+<heading>webpack.config.js</heading>
+
+...
+entry: {
+    app: './index.<emph>tsx</emph>'
+}
 </pre>
 
-    <li>Create the <emph>src\index.tsx</emph> file with the following content.</li>
+    <li>Add the following highlighted extensions to the <emph>resolve</emph> property in the <emph>webpack.config.js</emph> file.</p></li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+resolve: {
+    extensions: [".js", ".jsx", <emph>".ts", ".tsx"</emph>],
+}
+</pre>
+
+<li>Add the following rule to the <emph>webpack.config.js</emph> file.</p></li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+{
+    test: /\.tsx?$/,
+    use: 'ts-loader',
+    exclude: /node_modules/,
+}
+</pre>
+
+<li>Add the following highlighted entry to the <emph>babel-loader</emph> rule in the <emph>webpack.config.js</emph> file.</p></li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+{
+    test: /\.(js)x?$/,
+    exclude: /node_modules/,
+    loader: "babel-loader",
+    options: {
+        presets: [
+            "@babel/preset-env",
+            "@babel/preset-react",
+            <emph>"@babel/preset-typescript"</emph>
+        ],
+    },
+}
+</pre>
+
+<li>Add the following entry in the <emph>babel.config.js</emph> file.</p></li>
+
+<pre class="code">
+<heading>babel.config.js</heading>
+
+module.exports = {
+    presets: [
+        "@babel/preset-env",
+        "@babel/preset-react",
+        <emph>"@babel/preset-typescript"</emph>
+    ]
+}
+</pre>
+
+
+<li>Rename <emph>src\index.js</emph> to <emph>src\index.tsx</emph> file. Add the highlighted content.</li>
 
 <pre class="code">
 <heading>index.tsx</heading>
@@ -1451,8 +1402,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
 
-const root: ReactDOM.Root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
+const root<emph>: ReactDOM.Root</emph> = ReactDOM.createRoot(
+    document.getElementById('root') <emph>as HTMLElement</emph>
 );
 
 root.render(
@@ -1462,99 +1413,43 @@ root.render(
 );
 </pre>
 
-<li>Create the <emph>src\components</emph> folder.</li>
-
-<pre class="code">
-    cd src
-    mkdir components
-</pre>
-
-<li>Create the <emph>src\components\App.tsx</emph> file with the following content.</li>
+<li>Rename <emph>src\components\App.jsx</emph> to <emph>src\components\App.tsx</emph> file. Add the highlighted content.</li>
 
 <pre class="code">
 <heading>App.tsx</heading>
 
 import React from 'react';
+import '../styles/main.scss';
+import imageSrc from '../assets/media/React-icon.svg';
 
-const App: React.FC = (): JSX.Element =&gt; {
+const App<emph>: React.FC</emph> = (): <emph>JSX.Element</emph> =&gt; {
     return (
-        &lt;div&gt;
-            &lt;div&gt;
-                &lt;h1&gt;React App&lt;/h1&gt;
+        &lt;div className="app"&gt;
+            &lt;div className="app__header"&gt;
+                &lt;img src={`${imageSrc}`} className='app__header-icon' alt="React icon" /&gt;
+                &lt;h1 className="app__header-title"&gt;React App&lt;/h1&gt;
             &lt;/div&gt;
         &lt;/div&gt;
-    )
+    );
 }
 
 export default App;
 </pre>
 
-<li>Create the top-level page</li>
+<li>Test the application:</li>
 
 <ol type="a">
-    <li>Create the<emph>public</emph> folder.</li>
+    <li>Run the webpack server:</li>
 
 <pre class="code">
-    mkdir public
+npm run start
 </pre>
 
-<li>Create the <emph>public\index.html</emph> file with the following content.</li>
-</ol>
+<li>In a browser page navigate to <emph>http://localhost:4000</emph>. The application is rendering using Typescript.</li>
 
-<pre class="code">
-<heading>index.html</heading>
-
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Practical React&lt;/title&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-    &lt;div id="root"&gt;&lt;/div&gt;
-
-    <com>&lt;!-- The bundle-name should be same as you defined in webpack config file --&gt;</com>
-    &lt;script src="./assets/js/app.bundle.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</pre>
+<p><img src="./media/InstallationAndSetup-16.jpg" alt="App with images"></p>
 </ol>
 </ol>
-
-
-
-
-<h2 id="TestApp-4">Test the Application - 4</h2>
-
-<p>Let's test the application with the webpack-dev-server. Open a Command Prompt and navigate to the project root folder. Run the <emph>devserver</emph> script as follows:</li>
-
-<pre class="code">
-npm run devserver
-</pre>
-
-<p>The page opens automatically as shown below. You can see the React.js icon in the header as well as the background image pattern applied to the home page.</p>
-
-<p><img src="./media/InstallationAndSetup-04.jpg" alt="Home page with images"></p>
-</ol>
-
-
-<h2 id="TestApp-5">Test the Application - 5</h2>
-
-<p>Let's test the application with the webpack-dev-server. Open a Command Prompt and navigate to the project root folder. Run the <emph>devserver</emph> script as follows:</li>
-
-<pre class="code">
-npm run devserver
-</pre>
-
-<p>The page opens automatically as shown below and renders as before. The favicon does not display for some reason. Nothing is emitted to any folder. Webpack-dev-server renders everything in memory.</p>
-
-<p><img src="./media/InstallationAndSetup-05.jpg" alt="Home page HTML copied"></p>
-</ol>
-
 
 <p class="credit">
 <a href="https://www.youtube.com/watch?v=TOb1c39m64A" target="_blank">Webpack 5 Full Project Setup</a>
