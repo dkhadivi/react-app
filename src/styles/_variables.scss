@@ -5,4 +5,11 @@ $color-gray-lt: #E9E9E9;
 $color-white: #FFFFFF;
 
 // Fonts.
-$font-main: sans-serif;
+@font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf'), format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$font-main: 'Roboto', sans-serif;

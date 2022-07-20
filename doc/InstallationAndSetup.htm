@@ -22,6 +22,8 @@
     <li><a href="#RefactorWebpackConfig">Refactor the Webpack Configuration File</a></li>
     <li><a href="#InstallCSSAndSassPkgs">Install CSS and Sass Packages</a></li>
     <li><a href="#InstallReactPkgs">Install the React Packages</a></li>
+    <li><a href="#FontSupport">Install Font Support</a></li>
+    <li><a href="#ImageSupport">Install Image Support</a></li>
 
     <br/>
     <li><a href="#ConfigWebpack">Configure Webpack</a></li>
@@ -30,9 +32,7 @@
 
     <li><a href="#TestApp-1">Test the Application - 1</a></li>
     <li><a href="#TestApp-2">Test the Application - 2</a></li>
-    <li><a href="#FontSupport">Install Font Support</a></li>
     <li><a href="#TestApp-3">Test the Application - 3</a></li>
-    <li><a href="#ImageSupport">Install Image Support</a></li>
     <li><a href="#TestApp-4">Test the Application - 4</a></li>
     <li><a href="#InstallHTMLFileCopy">Install HTML File Copy Support</a></li>
     <li><a href="#TestApp-5">Test the Application - 5</a></li>
@@ -989,9 +989,207 @@ npm run start
 </ol>
 </ol>
 
-<p>Continue... 56:15</p>
+<h2 id="FontSupport">Install Font Support</h2>
 
+<p>Continue form the previous step.</p>
 
+<ol>
+    <li>Download the Google <a href="https://fonts.google.com/specimen/Roboto" target="_blank">Roboto </a> font family.</li>
+
+    <li>Place the contents of the downloaded zip file in the <emph>src\assets\fonts\Roboto</emph> folder. Create the folder hierarchy.</li>
+
+    <li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+{
+    <com>// Emit all the fonts to the "/assets/fonts/Roboto" folder within the "outputPath" folder.</com>
+    test: /\.(woff(2)?|ttf|eot|otf)$/i,
+    type: 'asset/resource',
+    generator: {
+        filename: './assets/fonts/Roboto/[name][ext]',
+        outputPath: '.',
+    },
+}
+</pre>
+
+<li>Add the following content to the <emph>_variables.scss</emph> file.</li>
+
+<pre class="code">
+<heading>_variables.scss</heading>
+
+...
+<com>// Fonts</com>
+@font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf'), format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+</pre>
+
+<li>Change the <emph>$font-main</emph> variable that's defined in the <emph>_variables.scss</emph> file to the following:</li>
+
+<pre class="code">
+<heading>_variables.scss</heading>
+
+...
+$font-main: 'Roboto', sans-serif;
+</pre>
+
+<li>Test the application:</li>
+
+<ol type="a">
+    <li>Run the webpack server:</li>
+
+<pre class="code">
+npm run start
+</pre>
+
+<li>In a browser page navigate to <emph>http://localhost:4000</emph>. You can see the main title is using our font.</li>
+
+<p><img src="./media/InstallationAndSetup-14.jpg" alt="App with fonts."></p>
+</ol>
+</ol>
+
+<h2 id="ImageSupport">Install Image Support</h2>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+    <li>Create <emph>src\assets\media</emph> folder and place the <emph>React-icon.svg</emph> in it.</li>
+
+    <li>Create <emph>src\assets\media\backgrounds</emph> folder and place the <emph>bkg-pattern.jpg</emph> in it.</li>
+
+    <li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+...
+{
+    <com>// Media assets.</com>
+    <com>// Emit all the images preserving the folder source image folder structure.</com>
+    test: /\.(png|jpe?g|gif|svg|webp)$/i,
+    type: 'asset/resource',
+    generator: {
+        filename: (name) =&gt; {
+            const path = name.filename.split("/").slice(0, -1).join("/");
+            return `${path}/[name][ext]`;
+        },
+    },
+}
+</pre>
+
+<p>Notes:</p>
+<ul>
+    <li>The <emph>generator</emph> property can be a JSON object or a function. We are using a function here in order to tell Webpack to maintain the src image folder structure when it emits the images. I found this solution in the <emph>Preserve subdirectories in webpack 5</emph> link (see credits below).</li>
+
+    <li>If you use <emph>type: 'asset/inline'</emph> instead as shown below, the images will be inlined in JavaScript bundle file. Every image is converted to base64 in inserted directly in the <emph>src</emph> property of IMG tag etc...</li>
+
+<pre class="code">
+{
+    test: /\.(png|jpe?g|gif|svg|webp)$/i,
+    type: 'asset/inline'
+}
+</pre>
+
+<p>This technique is very useful for small images where the browser doesn't have to make additional requests to gest these inlined images.</p>
+
+    <li>If you use <emph>type: 'asset'</emph> instead, then webpack will automatically determine based on the default image maximum size, which is 8Kb according to the docs, whether an image should be inlined or outputted to the folder.</li>
+
+<li>The following highlighted code changes the maximum default size of an image to 30Kb.</li>
+
+<pre class="code">
+{
+    test: /\.(png|jpe?g|gif|svg|webp)$/i,
+    type: 'asset/resource',
+    <emph>parser: {
+        dataUrlCondition: {
+            maxSize: 30 * 1024,
+        }
+    }</emph>
+}
+</pre>
+
+</ul>
+
+<li>Add a React.js icon to the header by adding the highlighted code to the <emph>src\components\App.tsx</emph> file</li>.
+
+<pre class="code">
+<heading>App.tsx</heading>
+
+import React from 'react';
+import '../styles/main.scss';
+<emph>import imageSrc from '../assets/media/React-icon.svg';</emph>
+
+const App: React.FC = (): JSX.Element =&gt; {
+    return (
+        &lt;div className="app"&gt;
+            &lt;div className="app__header"&gt;
+                <emph>&lt;img src={`${imageSrc}`} className='app__header-icon' alt="React icon" /&gt;</emph>
+                &lt;h1 className="app__header-title"&gt;Practical React&lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default App;
+</pre>
+
+<li>Add a background image <emph>App</emph> component by adding the highlighted styles below to the <emph>src\assets\styles\components\App.scss</emph> file</li>. Comment out the <emph>background-color</emph> style.
+
+<pre class="code">
+<heading>App.scss</heading>
+
+.app {
+    height: 100vh;
+    <emph><com>// background-color: $color-gray-lt;</com>
+    background-image: url('../assets/media/backgrounds/bkg-pattern.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;</emph>
+
+    &__header {
+        padding: 1rem;
+        background-color: $color-blue;
+        border-bottom: .2rem solid $color-black;
+
+        display: flex;
+        flex-direction: rows;
+    }
+
+    &__header-title {
+        font-size: 4rem;
+        letter-spacing: .2rem;
+        color: $color-white;
+    }
+
+    &__header-icon {
+        width: 5rem;
+        margin: 0 2rem 0 0;
+    }
+}
+</pre>
+
+<li>Test the application:</li>
+
+<ol type="a">
+    <li>Run the webpack server:</li>
+
+<pre class="code">
+npm run start
+</pre>
+
+<li>In a browser page navigate to <emph>http://localhost:4000</emph>. You can see the React icon to the left of the main title as well as the background image.</li>
+
+<p><img src="./media/InstallationAndSetup-15.jpg" alt="App with images"></p>
+</ol>
+</ol>
+
+<p>Continue... 1:17:00</p>
 
 <h2 id="ConfigWebpack">Configure Webpack</h2>
 
@@ -1264,162 +1462,7 @@ export default App;
 </ol>
 
 
-<h2 id="FontSupport">Install Font Support</h2>
 
-<p>Continue form the previous step.</p>
-
-<ol>
-    <li>Download the Google <a href="https://fonts.google.com/specimen/Roboto" target="_blank">Roboto </a> font family.</li>
-
-    <li>Place the contents of the downloaded zip file in the <emph>src\assets\fonts\Roboto</emph> folder. Create the folder hierarchy.</li>
-
-    <li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
-
-<pre class="code">
-<heading>webpack.config.js</heading>
-
-...
-{
-    <com>// Emit all the fonts to the "/assets/fonts/Roboto" folder within the "outputPath" folder.</com>
-    test: /\.(woff(2)?|ttf|eot|otf)$/i,
-    type: 'asset/resource',
-    generator: {
-        filename: './assets/fonts/Roboto/[name][ext]',
-        outputPath: '.',
-    },
-}
-</pre>
-
-<li>Add the following content to the <emph>_variables.scss</emph> file.</li>
-
-<pre class="code">
-<heading>_variables.scss</heading>
-
-...
-<com>// Fonts</com>
-@font-face {
-    font-family: 'Roboto';
-    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf'), format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-</pre>
-
-<li>Change the <emph>$font-main</emph> variable that's defined in the <emph>_variables.scss</emph> file to the following:</li>
-
-<pre class="code">
-<heading>_variables.scss</heading>
-
-...
-$font-main: 'Roboto', sans-serif;
-</pre>
-</ol>
-
-<h2 id="TestApp-3">Test the Application - 3</h2>
-
-<p>Let's test the application with the webpack-dev-server. Open a Command Prompt and navigate to the project root folder. Run the <emph>devserver</emph> script as follows:</li>
-
-<pre class="code">
-npm run devserver
-</pre>
-
-<p>The page opens automatically as shown below. You can now see the Font applied to the main title.</p>
-
-<p><img src="./media/InstallationAndSetup-03.jpg" alt="Home page with styles"></p>
-</ol>
-
-<h2 id="ImageSupport">Install Image Support</h2>
-
-<p>Continue form the previous step.</p>
-
-<ol>
-    <li>Create <emph>src\assets\media</emph> folder and place the <emph>React-icon.svg</emph> in it.</li>
-
-    <li>Create <emph>src\assets\media\backgrounds</emph> folder and place the <emph>bkg-pattern.jpg</emph> in it.</li>
-
-    <li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
-
-<pre class="code">
-<heading>webpack.config.js</heading>
-
-...
-{
-    <com>// Media assets.</com>
-    <com>// Emit all the images preserving the folder source image folder structure.</com>
-    test: /\.(png|jpe?g|gif|svg|webp)$/i,
-    type: 'asset/resource',
-    generator: {
-        filename: (name) =&gt; {
-            const path = name.filename.split("/").slice(0, -1).join("/");
-            return `${path}/[name][ext]`;
-        },
-    },
-}
-</pre>
-
-<p>Notes:</p>
-<ul>
-    <li>The <emph>generator</emph> property can be a JSON object or a function. We are using a function here in order to tell Webpack to maintain the src image folder structure when it emits the images. I found this solution in the <emph>Preserve subdirectories in webpack 5<</emph> link (see credits below).</li>
-</ul>
-
-<li>Add a React.js icon to the header by adding the highlighted code to the <emph>src\components\App.tsx</emph> file</li>.
-
-<pre class="code">
-<heading>App.tsx</heading>
-
-import React from 'react';
-import '../styles/main.scss';
-<emph>import imageSrc from '../assets/media/React-icon.svg';</emph>
-
-const App: React.FC = (): JSX.Element =&gt; {
-    return (
-        &lt;div className="app"&gt;
-            &lt;div className="app__header"&gt;
-                <emph>&lt;img src={`.${imageSrc}`} className='app__header-icon' alt="React icon" /&gt;</emph>
-                &lt;h1 className="app__header-title"&gt;Practical React&lt;/h1&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    )
-}
-
-export default App;
-</pre>
-
-<li>Add a background image <emph>App</emph> component by adding the highlighted styles below to the <emph>src\assets\styles\components\App.scss</emph> file</li>. Comment out the <emph>background-color</emph> style.
-
-<pre class="code">
-<heading>App.scss</heading>
-
-.app {
-    height: 100vh;
-    <emph><com>// background-color: $color-gray-lt;</com>
-    background-image: url('../assets/media/backgrounds/bkg-pattern.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;</emph>
-
-    &__header {
-        padding: 1rem;
-        background-color: $color-blue;
-        border-bottom: .2rem solid $color-black;
-
-        display: flex;
-        flex-direction: rows;
-    }
-
-    &__header-title {
-        font-size: 4rem;
-        letter-spacing: .2rem;
-        color: $color-white;
-    }
-
-    &__header-icon {
-        width: 5rem;
-        margin: 0 2rem 0 0;
-    }
-}
-</pre>
-</ol>
 
 <h2 id="TestApp-4">Test the Application - 4</h2>
 
@@ -1548,7 +1591,7 @@ npm run devserver
 <br/><a href="https://stackoverflow.com/questions/43638454/webpack-typescript-image-import" target="_blank">stack overflow - Webpack & Typescript image import</a>
 <br/><a href="https://survivejs.com/webpack/loading/images/" target="_blank">Loading Images</a>
 <br/><a href="https://stackoverflow.com/questions/66580334/preserve-subdirectories-in-webpack-5" target="_blank">Preserve subdirectories in webpack 5</a>
-<br/>Last revised: 7/18/2022
+<br/>Last revised: 7/20/2022
 </p>
 </body>
 </html>

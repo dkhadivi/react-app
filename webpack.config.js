@@ -23,7 +23,7 @@ module.exports = (env, argv) => {
 
     return {
         mode: mode,
-        devtool: "source-map",
+        devtool: false,
         module: {
             rules: [
                 {
@@ -58,6 +58,27 @@ module.exports = (env, argv) => {
                             },
                         }
                     ],
+                },
+                {
+                    // Emit all the fonts to the "/assets/fonts/Roboto" folder within the "outputPath" folder.
+                    test: /\.(woff(2)?|ttf|eot|otf)$/i,
+                    type: 'asset/resource',
+                    generator: {
+                        filename: './assets/fonts/Roboto/[name][ext]',
+                        outputPath: '.',
+                    },
+                },
+                {
+                    // Media assets.
+                    // Emit all the images preserving the folder source image folder structure.
+                    test: /\.(png|jpe?g|gif|svg|webp)$/i,
+                    type: 'asset/resource',
+                    generator: {
+                        filename: (name) => {
+                            const path = name.filename.split("/").slice(0, -1).join("/");
+                            return `${path}/[name][ext]`;
+                        },
+                    },
                 }
             ]
         },
