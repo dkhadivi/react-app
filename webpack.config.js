@@ -16,10 +16,10 @@ module.exports = (env, argv) => {
     const deployFolder = (mode !== 'production') ? 'public' : 'dist';
 
     console.log('\n>>>> Begin ENV');
-    console.log('    argv.mode    : ' + mode);
-    console.log('    isDevelopment: ' + isDevelopment);
-    console.log('    deployFolder : ' + deployFolder);
-    console.log('    port         : ' + port);
+    console.log('    mode          : ' + mode);
+    console.log('    isDevelopment : ' + isDevelopment);
+    console.log('    deployFolder  : ' + path.resolve(__dirname, deployFolder));
+    console.log('    devServer port: ' + port);
     console.log('>>>> End ENV\n');
 
     return {
@@ -30,7 +30,7 @@ module.exports = (env, argv) => {
         mode: mode,
         devtool: false,
         output: {
-            path: path.resolve(__dirname, deployFolder),
+            path: path.resolve(__dirname, deployFolder),    // Must be an absolute path.
             filename: 'assets/js/[name].bundle.js',
             publicPath: '/',
         },
@@ -39,7 +39,7 @@ module.exports = (env, argv) => {
                 directory: path.join(__dirname, deployFolder),
             },
             compress: true,
-            port: 4000,
+            port: port,
             hot: true
         },
         module: {
