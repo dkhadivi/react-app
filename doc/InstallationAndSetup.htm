@@ -24,6 +24,7 @@
     <li><a href="#InstallReactPkgs">Install the React Packages</a></li>
     <li><a href="#FontSupport">Install Font Support</a></li>
     <li><a href="#ImageSupport">Install Image Support</a></li>
+    <li><a href="#InstallHTMLFileCopy">Install HTML File Copy Support</a></li>
 
     <br/>
     <li><a href="#ConfigWebpack">Configure Webpack</a></li>
@@ -34,7 +35,6 @@
     <li><a href="#TestApp-2">Test the Application - 2</a></li>
     <li><a href="#TestApp-3">Test the Application - 3</a></li>
     <li><a href="#TestApp-4">Test the Application - 4</a></li>
-    <li><a href="#InstallHTMLFileCopy">Install HTML File Copy Support</a></li>
     <li><a href="#TestApp-5">Test the Application - 5</a></li>
 </ul>
 
@@ -1076,6 +1076,7 @@ npm run start
     type: 'asset/resource',
     generator: {
         filename: (name) =&gt; {
+            <com>// Remove the last segment in the path.</com>
             const path = name.filename.split("/").slice(0, -1).join("/");
             return `${path}/[name][ext]`;
         },
@@ -1189,7 +1190,70 @@ npm run start
 </ol>
 </ol>
 
-<p>Continue... 1:17:00</p>
+<p>Continue... 1:21:00</p>
+
+<h2 id="InstallHTMLFileCopy">Install HTML File Copy Support</h2>
+
+<p>Let's install the capability for Webpack to copy the <emph>index.html</emph> file, which now resides in the <emph>dist</emph> folder, from the <emph>src</emph> folder. This way the <emph>src</emph> folder will contain all the source code.</p>
+
+<p>Continue form the previous step.</p>
+
+<ol>
+<li>Install the <a href="https://www.npmjs.com/package/html-webpack-plugin" target="_blank">html-webpack-plugin</a> package.</li>
+
+<pre class="code">
+npm i -save-dev html-webpack-plugin
+</pre>
+
+<li>Add the following plugin to the <emph>webpack.config.js</emph> file.</li>
+
+<pre class="code">
+<heading>webpack.config.js</heading>
+
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+
+...
+plugins: [
+    ...
+    new HtmlWebPackPlugin({
+        template: './index.html',
+        filename: 'index.html',
+        favicon: './favicon.ico',
+        inject: 'body'
+    })
+]
+</pre>
+
+<li>Place the <emph>favicon.ico</emph> in the <emph>src</emph> folder.</li>
+
+<li>Move the <emph>dist\index.html</emph> file to the <emph>src</emph> folder. comment out (or remove) the JavaScript tag as shown below.</li>
+
+
+<pre class="code">
+<heading>index.html</heading>
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Practical React&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+
+    <com>&lt;!-- The bundle-name should be same as you defined in webpack config file --&gt;</com>
+    <com>&lt;!--&lt;script src="./assets/js/app.bundle.js"&gt;&lt;/script&gt;--&gt;</com>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<li>Delete the <emph>dist</emph> folder.</li>
+</ol>
+
 
 <h2 id="ConfigWebpack">Configure Webpack</h2>
 
@@ -1477,93 +1541,6 @@ npm run devserver
 <p><img src="./media/InstallationAndSetup-04.jpg" alt="Home page with images"></p>
 </ol>
 
-<h2 id="InstallHTMLFileCopy">Install HTML File Copy Support</h2>
-
-<p>Let's install the capability for Webpack to copy the <emph>index.html</emph> file, which now resides in the <emph>public</emph> folder, from the <emph>src</emph> foder. This way the <emph>src</emph> will contain all the source code.</p>
-
-
-<p>Continue form the previous step.</p>
-
-<ol>
-    <li>Install the <a href="https://www.npmjs.com/package/html-loader" target="_blank">html-loader</a> package.</li>
-
-<pre class="code">
-npm i --save-dev html-loader
-</pre>
-
-<li>Install the <a href="https://www.npmjs.com/package/html-webpack-plugin" target="_blank">html-webpack-plugin</a> package.</li>
-
-<pre class="code">
-npm i -save-dev html-webpack-plugin
-</pre>
-
-<li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
-
-<pre class="code">
-<heading>webpack.config.js</heading>
-
-...
-{
-    test: /\.html$/,
-    use: [
-        {
-            loader: "html-loader",
-            options: {
-                minimize: false
-            }
-        }
-    ]
-}
-</pre>
-
-<li>Add the following plugin to the <emph>webpack.config.js</emph> file.</li>
-
-<pre class="code">
-<heading>webpack.config.js</heading>
-
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-
-...
-plugins: [
-    ...
-    new HtmlWebPackPlugin({
-        template: './index.html',
-        filename: 'index.html',
-        favicon: './favicon.ico',
-        inject: 'body'
-    })
-]
-</pre>
-
-<li>Place the <emph>favicon.ico</emph> in the <emph>src</emph> folder.</li>
-
-<li>Move the <emph>public\index.html</emph> file to the <emph>src</emph> folder. comment out the JavaScript tag as shown below.</li>
-
-
-<pre class="code">
-<heading>index.html</heading>
-
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Practical React&lt;/title&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-    &lt;div id="root"&gt;&lt;/div&gt;
-
-    <com>&lt;!-- The bundle-name should be same as you defined in webpack config file --&gt;</com>
-    <com>&lt;!--&lt;script src="./assets/js/app.bundle.js"&gt;&lt;/script&gt;--&gt;</com>
-&lt;/body&gt;
-&lt;/html&gt;
-</pre>
-
-<li>Delete the <emph>public</emph> folder.</li>
-</ol>
 
 <h2 id="TestApp-5">Test the Application - 5</h2>
 

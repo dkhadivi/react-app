@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = (env, argv) => {
@@ -22,8 +23,25 @@ module.exports = (env, argv) => {
     console.log('>>>> End ENV\n');
 
     return {
+        context: path.resolve(__dirname, 'src'),
+        entry: {
+            app: './index.js'
+        },
         mode: mode,
         devtool: false,
+        output: {
+            path: path.resolve(__dirname, deployFolder),
+            filename: 'assets/js/[name].bundle.js',
+            publicPath: '/',
+        },
+        devServer: {
+            static: {
+                directory: path.join(__dirname, deployFolder),
+            },
+            compress: true,
+            port: 4000,
+            hot: true
+        },
         module: {
             rules: [
                 {
@@ -75,6 +93,7 @@ module.exports = (env, argv) => {
                     type: 'asset/resource',
                     generator: {
                         filename: (name) => {
+                            // Remove the last segment in the path.
                             const path = name.filename.split("/").slice(0, -1).join("/");
                             return `${path}/[name][ext]`;
                         },
@@ -83,6 +102,12 @@ module.exports = (env, argv) => {
             ]
         },
         plugins: [
+            new HtmlWebPackPlugin({
+                template: './index.html',
+                filename: 'index.html',
+                favicon: './favicon.ico',
+                inject: 'body'
+            }),
             new MiniCssExtractPlugin({
                 filename: isDevelopment ? '[name].css' : '[name].[hash].css',
                 chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
@@ -90,14 +115,6 @@ module.exports = (env, argv) => {
         ],
         resolve: {
             extensions: [".js", ".jsx"],
-        },
-        devServer: {
-            static: {
-                directory: path.join(__dirname, 'dist'),
-            },
-            compress: true,
-            port: 4000,
-            hot: true
-        },
+        }
     };
 };
