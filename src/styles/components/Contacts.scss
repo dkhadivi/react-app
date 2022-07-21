@@ -1,0 +1,32 @@
+.contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+
+    &__button {
+        padding: 1rem;
+        font-weight: 700;
+        font-size: 2rem;
+        min-width: 15rem;
+
+        &:not(:first-of-type) {
+            margin-left: 2rem;
+        }
+    }
+
+    &__contact-list {
+        margin: 2rem 0 0 0;
+        padding: 2rem;
+        border-radius: .5rem;
+        background-color: rgba(47, 116, 192, 0.35);
+    }
+
+    &__contact {
+        padding: 0.5rem 0;
+        font-size: 1.75rem;
+        font-weight: 600;
+        letter-spacing: 0.1rem;
+    }
+
+}

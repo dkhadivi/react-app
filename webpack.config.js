@@ -1,6 +1,7 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = (env, argv) => {
     // The mode is passed in as argument. Default to 'development'.
@@ -117,7 +118,8 @@ module.exports = (env, argv) => {
             new MiniCssExtractPlugin({
                 filename: isDevelopment ? '[name].css' : '[name].[hash].css',
                 chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
-            })
+            }),
+            new ReactRefreshWebpackPlugin()
         ],
         resolve: {
             extensions: [".js", ".jsx", ".ts", ".tsx"],
