@@ -7,7 +7,7 @@
         "watch": "webpack --watch",
         "clean": "rmdir /s /q dist",
         "clean-dev": "if exist public rmdir /s /q public",
-        "clean-prod": "if exist public dist /s /q dist"
+        "clean-prod": "if exist dist rmdir /s /q dist"
     },
     "devDependencies": {
         "@babel/core": "^7.18.9",

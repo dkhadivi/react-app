@@ -40,13 +40,13 @@ mkdir react-app
 cd react-app
 </pre>
 
-<li>Login to your <emph><a href="https://github.com/" target="_blank">Github account</a></emph>.</li>
+<li>Login to your <em><a href="https://github.com/" target="_blank">Github account</a></em>.</li>
 
 <li>Click the add icon (plus sign) and select <b>New Repository</b>.</li>
 
 <p><img src="./media/InstallationAndSetup-01.jpg" alt="New Github repository."></p>
 
-<li>Add <emph>react-app</emph> for <emph>Repository name</emph>, and <emph>React application template</emph> for <emph>Description</emph>. Leave the rest of the settings as they are. Click <emph>Create repository</emph>.</li>
+<li>Add <em>react-app</em> for <em>Repository name</em>, and <em>React application template</em> for <em>Description</em>. Leave the rest of the settings as they are. Click <em>Create repository</em>.</li>
 
 <p><img src="./media/InstallationAndSetup-02.jpg" alt="New Github repository."></p>
 
@@ -60,7 +60,7 @@ cd react-app
 git config http.sslVerify false
 </pre>
 
-<p>Otherwise, you'll get this error when the <emph>git push</emph> command is executed below.</p>
+<p>Otherwise, you'll get this error when the <em>git push</em> command is executed below.</p>
 
 <pre class="code">
 fatal: unable to access 'https://github.com/dkhadivi/react-app.git/': SSL certificate problem: self signed certificate in certificate chain
@@ -91,7 +91,7 @@ git push -u origin main
 
 <p><img src="./media/InstallationAndSetup-04.jpg" alt="New Github repository."></p>
 
-<li>Create the <emph>.gitignore</emph> file in project's root folder with the following content, which prevents the tracking of files in the <emph>node_modules</emph> folder:
+<li>Create the <em>.gitignore</em> file in project's root folder with the following content, which prevents the tracking of files in the <em>node_modules</em> folder:
 
 <pre class="code">
 <heading>.gitignore</heading>
@@ -123,7 +123,7 @@ npm -v
 npm init -y
 </pre>
 
-<li>Reduce the <emph>package.json</emph> file by removing all the properties except the following:</li>
+<li>Reduce the <em>package.json</em> file by removing all the properties except the following:</li>
 
 <pre class="code">
 <heading>package.json</heading>
@@ -165,7 +165,7 @@ npm i --save-dev webpack-cli
 npm i --save-dev webpack-dev-server
 </pre>
 
-<li>Add the following script to the <emph>package.json</emph> file. For more information see <emph><a href="https://webpack.js.org/configuration/dev-server/" target="_blank"> webpack - DevServer</a></emph>.</li>
+<li>Add the following script to the <em>package.json</em> file. For more information see <em><a href="https://webpack.js.org/configuration/dev-server/" target="_blank"> webpack - DevServer</a></em>.</li>
 
 <pre class="code">
 "start": "webpack serve --config webpack.config.js --mode development",
@@ -193,7 +193,7 @@ npm i
 "private": true,
 </pre>
 
-<li>Create the webpack configuration file <emph>webpack.config.js</emph>.</li>
+<li>Create the webpack configuration file <em>webpack.config.js</em>.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -215,11 +215,11 @@ module.exports = {
 
 <p>Notes:</p>
 <ul>
-    <li><emph>mode: 'development'</emph> can serve as the default value for <emph>mode</emph> for the <emph>webpack</emph> command. The one specified in the <emph>--mode</emph> parameter in the <emph>package.json</emph> scripts overrides this property.</li>
+    <li><em>mode: 'development'</em> can serve as the default value for <em>mode</em> for the <em>webpack</em> command. The one specified in the <em>--mode</em> parameter in the <em>package.json</em> scripts overrides this property.</li>
 
-    <li><emph>static</emph> specifies the location for static content.</li>
+    <li><em>static</em> specifies the location for static content.</li>
 
-    <li><emph>hot: true</emph> enabled hot reloading. You can also use the <emph>--hot</emph> flag to the <emph>webpack</emph> command.</li>
+    <li><em>hot: true</em> enabled hot reloading. You can also use the <em>--hot</em> flag to the <em>webpack</em> command.</li>
 </ul>
 </ol>
 
@@ -228,9 +228,9 @@ module.exports = {
 <p>Continue form the previous step.</p>
 
 <ol>
-    <li>Create the <emph>src</emph> folder.</li>
+    <li>Create the <em>src</em> folder.</li>
 
-    <li>Create the <emph>src\index.js</emph> file. This is where Webpack looks by default without a configuration file.</li>
+    <li>Create the <em>src\index.js</em> file. This is where Webpack looks by default without a configuration file.</li>
 
 <pre class="code">
 <heading>index.js</heading>
@@ -250,11 +250,11 @@ console.log(contact);
 npm run build-dev
 </pre>
 
-<p>The build worked. The <emph>dist</emph> folder is created and the <emph>main.js</emph> file is emitted to it.</p>
+<p>The build worked. The <em>dist</em> folder is created and the <em>main.js</em> file is emitted to it.</p>
 
 <p><img src="./media/InstallationAndSetup-15.jpg" alt="New Github repository."></p>
 
-<p>The content of <emph>main.js</emph> file in development is quite large.</p>
+<p>The content of <em>main.js</em> file in development is quite large.</p>
 
 <pre class="code">
 <heading>main.js</heading>
@@ -293,7 +293,7 @@ eval("const contact = {\r\n    name: \"Jane\",\r\n    email: \"jsmith@gmail.com\
 ;
 </pre>
 
-<li>Shorten the output by adding the following entry to the <emph>webpack.config.js</emph> file.</li>
+<li>Shorten the output by adding the following entry to the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -308,7 +308,7 @@ devtool: false,
 npm run build-dev
 </pre>
 
-<p>The content of <emph>main.js</emph> file in development is quite large.</p>
+<p>The content of <em>main.js</em> file in development is quite large.</p>
 
 <pre class="code">
 <heading>main.js</heading>
@@ -341,16 +341,16 @@ node dist\main
 { name: 'Jane', email: 'jsmith@gmail.com', age: 26 }
 </pre>
 
-<li>Add the <emph>dist</emph> folder to the <emph>.gitignore</emph> file. We don't want to pull this folder from github. We want to build this folder and it's content fresh.</li>
+<li>Add the <em>dist</em> folder to the <em>.gitignore</em> file. We don't want to pull this folder from github. We want to build this folder and it's content fresh.</li>
 
 <pre class="code">
 <heading>.gitignore</heading>
 
-<emph>dist</emph>
+<em>dist</em>
 node_modules
 </pre>
 
-<li>Create the <emph>dist\index.html</emph> file with the following content.</li>
+<li>Create the <em>dist\index.html</em> file with the following content.</li>
 
 <pre class="code">
 <heading>index.html</heading>
@@ -373,7 +373,7 @@ node_modules
 
 <p>Notes:</p>
 <ul>
-    <li>Type <emph>html:5</emph> and Enter in VSCode to create an HTML boilerplate (for more info see <emph><a href="https://www.youtube.com/watch?v=PWlIyQ09O0o" target="_blank" rel="noopener noreferrer">this</a></emph>).</li>
+    <li>Type <em>html:5</em> and Enter in VSCode to create an HTML boilerplate (for more info see <em><a href="https://www.youtube.com/watch?v=PWlIyQ09O0o" target="_blank" rel="noopener noreferrer">this</a></em>).</li>
 </ul>
 
 <li>Test the application:</li>
@@ -385,16 +385,16 @@ node_modules
 npm run start
 </pre>
 
-<li>In a browser page navigate to <emph>http://localhost:4000</emph>, which was copied from webpack's output. We can see our page.</li>
+<li>In a browser page navigate to <em>http://localhost:4000</em>, which was copied from webpack's output. We can see our page.</li>
 
 <p><img src="./media/InstallationAndSetup-05.jpg" alt="New Github repository."></p>
 
-<p>And the <emph>main.js</emph> file's output:</p>
+<p>And the <em>main.js</em> file's output:</p>
 
 <p><img src="./media/InstallationAndSetup-06.jpg" alt="New Github repository."></p>
 </ol>
 
-<li>The above Console output also shows that "Live Reloading" is enabled. To test this. Replace the content of <emph>src\index.js</emph> with the following.</li>
+<li>The above Console output also shows that "Live Reloading" is enabled. To test this. Replace the content of <em>src\index.js</em> with the following.</li>
 
 <pre class="code">
 <heading>index.js</heading>
@@ -420,7 +420,7 @@ console.log(employee);
 
 <p>Notes:</p>
 <ul>
-<li><emph>Important</emph>: The <emph>build\main.js</emph> content is still the old content and has not be refreshed (see below). The Webpack-dev-server stores everything in memory and does not emit anything to the <emph>dist</emph> folder.</li>
+<li><em>Important</em>: The <em>build\main.js</em> content is still the old content and has not be refreshed (see below). The Webpack-dev-server stores everything in memory and does not emit anything to the <em>dist</em> folder.</li>
 
 <pre class="code">
 <heading>main.js</heading>
@@ -441,7 +441,7 @@ console.log(contact);
 ;
 </pre>
 
-<li>To rebuild the content of <emph>dist</emph> folder, run the <emph>build-dev</emph> script.</li>
+<li>To rebuild the content of <em>dist</em> folder, run the <em>build-dev</em> script.</li>
 </ul>
 </ol>
 
@@ -468,7 +468,7 @@ npm i --save-dev @babel/core
 npm i --save-dev @babel/preset-env
 </pre>
 
-<li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+<li>Add the following rule to the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -486,7 +486,7 @@ npm i --save-dev @babel/preset-env
 }
 </pre>
 
-<li>Create the <emph>babel.config.js</emph> file in project root folder with following content:</li>
+<li>Create the <em>babel.config.js</em> file in project root folder with following content:</li>
 
 <pre class="code">
 <heading>babel.config.js</heading>
@@ -505,7 +505,7 @@ module.exports = {
 npm run start
 </pre>
 
-<li>In a browser page navigate to <emph>http://localhost:4000</emph>. We can see our page with Babel working.</li>
+<li>In a browser page navigate to <em>http://localhost:4000</em>. We can see our page with Babel working.</li>
 
 <p><img src="./media/InstallationAndSetup-08.jpg" alt="New Github repository."></p>
 </ol>
@@ -522,11 +522,11 @@ npm run start
 npm run start
 </pre>
 
-<li>In a browser page navigate to <emph>http://localhost:4000</emph>. Open the Developer Tools. You can see that we have access to the final deployed <emph>main.js</emph> file.</li>
+<li>In a browser page navigate to <em>http://localhost:4000</em>. Open the Developer Tools. You can see that we have access to the final deployed <em>main.js</em> file.</li>
 
 <p><img src="./media/InstallationAndSetup-09.jpg" alt="New Github repository."></p>
 
-<li>Change the <emph>devtool</emph> property value from <emph>"source-map"</emph>.</li>
+<li>Change the <em>devtool</em> property value from <em>"source-map"</em>.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -541,18 +541,18 @@ devtool: "source-map",
 npm run start
 </pre>
 
-<li>In a browser page navigate to <emph>http://localhost:4000</emph>. Open the Developer Tools. You can see that we have access to the final deployed <emph>main.js</emph> file as well as the source file under the <emph>webpack</emph> node.</li>
+<li>In a browser page navigate to <em>http://localhost:4000</em>. Open the Developer Tools. You can see that we have access to the final deployed <em>main.js</em> file as well as the source file under the <em>webpack</em> node.</li>
 
 <p><img src="./media/InstallationAndSetup-10.jpg" alt="New Github repository."></p>
 
-<p>If you click on <emph>src\index.js</emph>, you have access to the original source code.
+<p>If you click on <em>src\index.js</em>, you have access to the original source code.
 
 <p><img src="./media/InstallationAndSetup-11.jpg" alt="New Github repository."></p>
 </ol>
 
 <h2 id="RefactorWebpackConfig">Refactor the Webpack Configuration File</h2>
 
-<p>Continue form the previous step. Let's refactor the <emph>webpack.config.js</emph> file to switch more easily between modes and also to display information to the Console.</p>
+<p>Continue form the previous step. Let's refactor the <em>webpack.config.js</em> file to switch more easily between modes and also to display information to the Console.</p>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -639,7 +639,7 @@ npm i --save-dev sass
 npm i --save-dev sass-loader
 </pre>
 
-<li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+<li>Add the following rule to the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -671,7 +671,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 }
 </pre>
 
-<li>Add the following plugin to the <emph>webpack.config.js</emph> file.</li>
+<li>Add the following plugin to the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -686,11 +686,11 @@ plugins: [
 ]
 </pre>
 
-<li>Create the <emph>src\styles</emph> folder.</li>
+<li>Create the <em>src\styles</em> folder.</li>
 
-<li>Create the <emph>src\styles\abstracts</emph> folder.</li>
+<li>Create the <em>src\styles\abstracts</em> folder.</li>
 
-<li>Create the <emph>src\styles\abstracts\_variables.scss</emph> file with the following content</li>
+<li>Create the <em>src\styles\abstracts\_variables.scss</em> file with the following content</li>
 
 <pre class="code">
 <heading>_variables.scss</heading>
@@ -704,9 +704,9 @@ $color-white: #FFFFFF;
 $font-main: sans-serif;
 </pre>
 
-<li>Create the <emph>src\styles\base</emph> folder.</li>
+<li>Create the <em>src\styles\base</em> folder.</li>
 
-<li>Create the <emph>src\styles\base\_base.scss</emph> file with the following content</li>
+<li>Create the <em>src\styles\base\_base.scss</em> file with the following content</li>
 
 <pre class="code">
 <heading>_base.scss</heading>
@@ -737,7 +737,7 @@ body {
 }
 </pre>
 
-<li>Create the <emph>src\styles\base\_typography.scss</emph> file with the following content:</li>
+<li>Create the <em>src\styles\base\_typography.scss</em> file with the following content:</li>
 
 <pre class="code">
 <heading>_typography.scss</heading>
@@ -750,7 +750,7 @@ h1 {
 }
 </pre>
 
-<li>Create the <emph>src\styles\main.scss</emph> file with the following content:</li>
+<li>Create the <em>src\styles\main.scss</em> file with the following content:</li>
 
 <pre class="code">
 <heading>main.scss</heading>
@@ -760,7 +760,7 @@ h1 {
 @import 'base/typography';
 </pre>
 
-<li>Add the following entry to the <emph>src\index.js</emph> file. This is entry point for webpack to pick up an process all the Sass files:</li>
+<li>Add the following entry to the <em>src\index.js</em> file. This is entry point for webpack to pick up an process all the Sass files:</li>
 
 <pre class="code">
 <heading>index.js</heading>
@@ -778,7 +778,7 @@ import './styles/main.scss';
 npm run start
 </pre>
 
-<li>In a browser page navigate to <emph>http://localhost:4000</emph>. You can see the Sass style applying to the H1 tag.</li>
+<li>In a browser page navigate to <em>http://localhost:4000</em>. You can see the Sass style applying to the H1 tag.</li>
 
 <p><img src="./media/InstallationAndSetup-12.jpg" alt="New Github repository."></p>
 </ol>
@@ -807,7 +807,7 @@ npm i --save react-dom
 npm i --save-dev @babel/preset-react
 </pre>
 
-<li>Add the highlighted code to the <emph>babel.config.js</emph> file.</li>
+<li>Add the highlighted code to the <em>babel.config.js</em> file.</li>
 
 <pre class="code">
 <heading>babel.config.js</heading>
@@ -820,7 +820,7 @@ npm i --save-dev @babel/preset-react
 }
 </pre>
 
-<li>Add the highlighted code to the <emph>babel-loader</emph> rule in the <emph>webpack.config.js</emph> file.</li>
+<li>Add the highlighted code to the <em>babel-loader</em> rule in the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -833,13 +833,13 @@ npm i --save-dev @babel/preset-react
     options: {
         presets: [
             "@babel/preset-env",
-            <emph>"@babel/preset-react"</emph>
+            <em>"@babel/preset-react"</em>
         ],
     },
 }
 </pre>
 
-<li>Add the following section to the <emph>webpack.config.js</emph> file.</li>
+<li>Add the following section to the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -850,7 +850,7 @@ resolve: {
 }
 </pre>
 
-<li>Replace the <emph>src\index.js</emph> content with the following.</li>
+<li>Replace the <em>src\index.js</em> content with the following.</li>
 
 <pre class="code">
 <heading>index.js</heading>
@@ -870,14 +870,14 @@ root.render(
 );
 </pre>
 
-<li>Create the <emph>src\components</emph> folder.</li>
+<li>Create the <em>src\components</em> folder.</li>
 
 <pre class="code">
 cd src
 mkdir components
 </pre>
 
-<li>Create the <emph>src\components\App.jsx</emph> file with the following content.</li>
+<li>Create the <em>src\components\App.jsx</em> file with the following content.</li>
 
 <pre class="code">
 <heading>App.jsx</heading>
@@ -898,9 +898,9 @@ const App = () =&gt; {
 export default App;
 </pre>
 
-<li>Create the <emph>src\styles\components</emph> folder.</li>
+<li>Create the <em>src\styles\components</em> folder.</li>
 
-<li>Create the <emph>src\styles\components\App.scss</emph> file with the following content:</li>
+<li>Create the <em>src\styles\components\App.scss</em> file with the following content:</li>
 
 <pre class="code">
 <heading>App.scss</heading>
@@ -931,7 +931,7 @@ export default App;
 }
 </pre>
 
-<li>Add the highlighted code to the <emph>src\styles\main.scss</emph> file.</li>
+<li>Add the highlighted code to the <em>src\styles\main.scss</em> file.</li>
 
 <pre class="code">
 <heading>main.scss</heading>
@@ -939,11 +939,11 @@ export default App;
 @use './variables';
 
 @import './typography';
-<emph>@import './components/App';</emph>
+<em>@import './components/App';</em>
 ...
 </pre>
 
-<li>Remove the striked-out code and add the highlighed code to the <emph>dist\index.html</emph> file.</li>
+<li>Remove the striked-out code and add the highlighed code to the <em>dist\index.html</em> file.</li>
 
 <pre class="code">
 <heading>index.html</heading>
@@ -958,7 +958,7 @@ export default App;
 &lt;/head&gt;
 &lt;body&gt;
     <strike>&lt;h1&gt;React App&lt;/h1&gt;</strike>
-    <emph>&lt;div id="root"&gt;&lt;/div&gt;</emph>
+    <em>&lt;div id="root"&gt;&lt;/div&gt;</em>
     &lt;script src="./main.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -973,7 +973,7 @@ export default App;
 npm run start
 </pre>
 
-<li>In a browser page navigate to <emph>http://localhost:4000</emph>. You can see the React <emph>App</emph> component is rendering with it's styles.</li>
+<li>In a browser page navigate to <em>http://localhost:4000</em>. You can see the React <em>App</em> component is rendering with it's styles.</li>
 
 <p><img src="./media/InstallationAndSetup-13.jpg" alt="New Github repository."></p>
 </ol>
@@ -986,9 +986,9 @@ npm run start
 <ol>
     <li>Download the Google <a href="https://fonts.google.com/specimen/Roboto" target="_blank">Roboto </a> font family.</li>
 
-    <li>Place the contents of the downloaded zip file in the <emph>src\assets\fonts\Roboto</emph> folder. Create the folder hierarchy.</li>
+    <li>Place the contents of the downloaded zip file in the <em>src\assets\fonts\Roboto</em> folder. Create the folder hierarchy.</li>
 
-    <li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+    <li>Add the following rule to the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -1005,7 +1005,7 @@ npm run start
 }
 </pre>
 
-<li>Add the following content to the <emph>_variables.scss</emph> file.</li>
+<li>Add the following content to the <em>_variables.scss</em> file.</li>
 
 <pre class="code">
 <heading>_variables.scss</heading>
@@ -1020,7 +1020,7 @@ npm run start
 }
 </pre>
 
-<li>Change the <emph>$font-main</emph> variable that's defined in the <emph>_variables.scss</emph> file to the following:</li>
+<li>Change the <em>$font-main</em> variable that's defined in the <em>_variables.scss</em> file to the following:</li>
 
 <pre class="code">
 <heading>_variables.scss</heading>
@@ -1038,7 +1038,7 @@ $font-main: 'Roboto', sans-serif;
 npm run start
 </pre>
 
-<li>In a browser page navigate to <emph>http://localhost:4000</emph>. You can see the main title is using our font.</li>
+<li>In a browser page navigate to <em>http://localhost:4000</em>. You can see the main title is using our font.</li>
 
 <p><img src="./media/InstallationAndSetup-14.jpg" alt="App with fonts."></p>
 </ol>
@@ -1049,11 +1049,11 @@ npm run start
 <p>Continue form the previous step.</p>
 
 <ol>
-    <li>Create <emph>src\assets\media</emph> folder and place the <emph>React-icon.svg</emph> in it.</li>
+    <li>Create <em>src\assets\media</em> folder and place the <em>React-icon.svg</em> in it.</li>
 
-    <li>Create <emph>src\assets\media\backgrounds</emph> folder and place the <emph>bkg-pattern.jpg</emph> in it.</li>
+    <li>Create <em>src\assets\media\backgrounds</em> folder and place the <em>bkg-pattern.jpg</em> in it.</li>
 
-    <li>Add the following rule to the <emph>webpack.config.js</emph> file.</li>
+    <li>Add the following rule to the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -1076,9 +1076,9 @@ npm run start
 
 <p>Notes:</p>
 <ul>
-    <li>The <emph>generator</emph> property can be a JSON object or a function. We are using a function here in order to tell Webpack to maintain the src image folder structure when it emits the images. I found this solution in the <emph>Preserve subdirectories in webpack 5</emph> link (see credits below).</li>
+    <li>The <em>generator</em> property can be a JSON object or a function. We are using a function here in order to tell Webpack to maintain the src image folder structure when it emits the images. I found this solution in the <em>Preserve subdirectories in webpack 5</em> link (see credits below).</li>
 
-    <li>If you use <emph>type: 'asset/inline'</emph> instead as shown below, the images will be inlined in JavaScript bundle file. Every image is converted to base64 in inserted directly in the <emph>src</emph> property of IMG tag etc...</li>
+    <li>If you use <em>type: 'asset/inline'</em> instead as shown below, the images will be inlined in JavaScript bundle file. Every image is converted to base64 in inserted directly in the <em>src</em> property of IMG tag etc...</li>
 
 <pre class="code">
 {
@@ -1089,7 +1089,7 @@ npm run start
 
 <p>This technique is very useful for small images where the browser doesn't have to make additional requests to gest these inlined images.</p>
 
-    <li>If you use <emph>type: 'asset'</emph> instead, then webpack will automatically determine based on the default image maximum size, which is 8Kb according to the docs, whether an image should be inlined or outputted to the folder.</li>
+    <li>If you use <em>type: 'asset'</em> instead, then webpack will automatically determine based on the default image maximum size, which is 8Kb according to the docs, whether an image should be inlined or outputted to the folder.</li>
 
 <li>The following highlighted code changes the maximum default size of an image to 30Kb.</li>
 
@@ -1097,30 +1097,30 @@ npm run start
 {
     test: /\.(png|jpe?g|gif|svg|webp)$/i,
     type: 'asset/resource',
-    <emph>parser: {
+    <em>parser: {
         dataUrlCondition: {
             maxSize: 30 * 1024,
         }
-    }</emph>
+    }</em>
 }
 </pre>
 
 </ul>
 
-<li>Add a React.js icon to the header by adding the highlighted code to the <emph>src\components\App.tsx</emph> file</li>.
+<li>Add a React.js icon to the header by adding the highlighted code to the <em>src\components\App.tsx</em> file</li>.
 
 <pre class="code">
 <heading>App.tsx</heading>
 
 import React from 'react';
 import '../styles/main.scss';
-<emph>import imageSrc from '../assets/media/React-icon.svg';</emph>
+<em>import imageSrc from '../assets/media/React-icon.svg';</em>
 
 const App: React.FC = (): JSX.Element =&gt; {
     return (
         &lt;div className="app"&gt;
             &lt;div className="app__header"&gt;
-                <emph>&lt;img src={`${imageSrc}`} className='app__header-icon' alt="React icon" /&gt;</emph>
+                <em>&lt;img src={`${imageSrc}`} className='app__header-icon' alt="React icon" /&gt;</em>
                 &lt;h1 className="app__header-title"&gt;Practical React&lt;/h1&gt;
             &lt;/div&gt;
         &lt;/div&gt;
@@ -1130,18 +1130,18 @@ const App: React.FC = (): JSX.Element =&gt; {
 export default App;
 </pre>
 
-<li>Add a background image <emph>App</emph> component by adding the highlighted styles below to the <emph>src\assets\styles\components\App.scss</emph> file</li>. Comment out the <emph>background-color</emph> style.
+<li>Add a background image <em>App</em> component by adding the highlighted styles below to the <em>src\assets\styles\components\App.scss</em> file</li>. Comment out the <em>background-color</em> style.
 
 <pre class="code">
 <heading>App.scss</heading>
 
 .app {
     height: 100vh;
-    <emph><com>// background-color: $color-gray-lt;</com>
+    <em><com>// background-color: $color-gray-lt;</com>
     background-image: url('../assets/media/backgrounds/bkg-pattern.jpg');
     background-size: cover;
     background-position: center center;
-    background-repeat: no-repeat;</emph>
+    background-repeat: no-repeat;</em>
 
     &__header {
         padding: 1rem;
@@ -1174,7 +1174,7 @@ export default App;
 npm run start
 </pre>
 
-<li>In a browser page navigate to <emph>http://localhost:4000</emph>. You can see the React icon to the left of the main title as well as the background image.</li>
+<li>In a browser page navigate to <em>http://localhost:4000</em>. You can see the React icon to the left of the main title as well as the background image.</li>
 
 <p><img src="./media/InstallationAndSetup-15.jpg" alt="App with images"></p>
 </ol>
@@ -1182,7 +1182,7 @@ npm run start
 
 <h2 id="InstallHTMLFileCopy">Install HTML File Copy Support</h2>
 
-<p>Let's install the capability for Webpack to copy the <emph>index.html</emph> file, which now resides in the <emph>dist</emph> folder, from the <emph>src</emph> folder. This way the <emph>src</emph> folder will contain all the source code.</p>
+<p>Let's install the capability for Webpack to copy the <em>index.html</em> file, which now resides in the <em>dist</em> folder, from the <em>src</em> folder. This way the <em>src</em> folder will contain all the source code.</p>
 
 <p>Continue form the previous step.</p>
 
@@ -1193,7 +1193,7 @@ npm run start
 npm i -save-dev html-webpack-plugin
 </pre>
 
-<li>Add the following plugin to the <emph>webpack.config.js</emph> file.</li>
+<li>Add the following plugin to the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -1212,9 +1212,9 @@ plugins: [
 ]
 </pre>
 
-<li>Place the <emph>favicon.ico</emph> in the <emph>src</emph> folder.</li>
+<li>Place the <em>favicon.ico</em> in the <em>src</em> folder.</li>
 
-<li>Move the <emph>dist\index.html</emph> file to the <emph>src</emph> folder. comment out (or remove) the JavaScript tag as shown below.</li>
+<li>Move the <em>dist\index.html</em> file to the <em>src</em> folder. comment out (or remove) the JavaScript tag as shown below.</li>
 
 <pre class="code">
 <heading>index.html</heading>
@@ -1238,7 +1238,7 @@ plugins: [
 &lt;/html&gt;
 </pre>
 
-<li>Delete the <emph>dist</emph> folder.</li>
+<li>Delete the <em>dist</em> folder.</li>
 </ol>
 
 <h2 id="InstallTypescriptPkgs">Install the Typescript Packages</h2>
@@ -1270,7 +1270,7 @@ npm i --save-dev @babel/preset-typescript
 npm i --save-dev @types/react-dom
 </pre>
 
-<li>Create the <emph>index.d.ts</emph> file in the project root folder with the following content:</li>
+<li>Create the <em>index.d.ts</em> file in the project root folder with the following content:</li>
 
 <pre class="code">
 <heading>index.d.ts</heading>
@@ -1281,7 +1281,7 @@ declare module '*.svg';
 declare module '*.gif';
 </pre>
 
-<li>Create the <emph>tsconfig.json</emph> in the project root folder with the following content:</li>
+<li>Create the <em>tsconfig.json</em> in the project root folder with the following content:</li>
 
 <pre class="code">
 <heading>tsconfig.json</heading>
@@ -1323,29 +1323,29 @@ declare module '*.gif';
 }
 </pre>
 
-    <li>Change the extension of the <emph>entry</emph> property in the <emph>webpack.config.js</emph> file.</li>
+    <li>Change the extension of the <em>entry</em> property in the <em>webpack.config.js</em> file.</li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
 
 ...
 entry: {
-    app: './index.<emph>tsx</emph>'
+    app: './index.<em>tsx</em>'
 }
 </pre>
 
-    <li>Add the following highlighted extensions to the <emph>resolve</emph> property in the <emph>webpack.config.js</emph> file.</p></li>
+    <li>Add the following highlighted extensions to the <em>resolve</em> property in the <em>webpack.config.js</em> file.</p></li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
 
 ...
 resolve: {
-    extensions: [".js", ".jsx", <emph>".ts", ".tsx"</emph>],
+    extensions: [".js", ".jsx", <em>".ts", ".tsx"</em>],
 }
 </pre>
 
-<li>Add the following rule to the <emph>webpack.config.js</emph> file.</p></li>
+<li>Add the following rule to the <em>webpack.config.js</em> file.</p></li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -1357,7 +1357,7 @@ resolve: {
 }
 </pre>
 
-<li>Add the following highlighted entry to the <emph>babel-loader</emph> rule in the <emph>webpack.config.js</emph> file.</p></li>
+<li>Add the following highlighted entry to the <em>babel-loader</em> rule in the <em>webpack.config.js</em> file.</p></li>
 
 <pre class="code">
 <heading>webpack.config.js</heading>
@@ -1370,13 +1370,13 @@ resolve: {
         presets: [
             "@babel/preset-env",
             "@babel/preset-react",
-            <emph>"@babel/preset-typescript"</emph>
+            <em>"@babel/preset-typescript"</em>
         ],
     },
 }
 </pre>
 
-<li>Add the following entry in the <emph>babel.config.js</emph> file.</p></li>
+<li>Add the following entry in the <em>babel.config.js</em> file.</p></li>
 
 <pre class="code">
 <heading>babel.config.js</heading>
@@ -1385,13 +1385,13 @@ module.exports = {
     presets: [
         "@babel/preset-env",
         "@babel/preset-react",
-        <emph>"@babel/preset-typescript"</emph>
+        <em>"@babel/preset-typescript"</em>
     ]
 }
 </pre>
 
 
-<li>Rename <emph>src\index.js</emph> to <emph>src\index.tsx</emph> file. Add the highlighted content.</li>
+<li>Rename <em>src\index.js</em> to <em>src\index.tsx</em> file. Add the highlighted content.</li>
 
 <pre class="code">
 <heading>index.tsx</heading>
@@ -1400,8 +1400,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
 
-const root<emph>: ReactDOM.Root</emph> = ReactDOM.createRoot(
-    document.getElementById('root') <emph>as HTMLElement</emph>
+const root<em>: ReactDOM.Root</em> = ReactDOM.createRoot(
+    document.getElementById('root') <em>as HTMLElement</em>
 );
 
 root.render(
@@ -1411,7 +1411,7 @@ root.render(
 );
 </pre>
 
-<li>Rename <emph>src\components\App.jsx</emph> to <emph>src\components\App.tsx</emph> file. Add the highlighted content.</li>
+<li>Rename <em>src\components\App.jsx</em> to <em>src\components\App.tsx</em> file. Add the highlighted content.</li>
 
 <pre class="code">
 <heading>App.tsx</heading>
@@ -1420,7 +1420,7 @@ import React from 'react';
 import '../styles/main.scss';
 import imageSrc from '../assets/media/React-icon.svg';
 
-const App<emph>: React.FC</emph> = (): <emph>JSX.Element</emph> =&gt; {
+const App<em>: React.FC</em> = (): <em>JSX.Element</em> =&gt; {
     return (
         &lt;div className="app"&gt;
             &lt;div className="app__header"&gt;
@@ -1443,14 +1443,11 @@ export default App;
 npm run start
 </pre>
 
-<li>In a browser page navigate to <emph>http://localhost:4000</emph>. The application is rendering using Typescript.</li>
+<li>In a browser page navigate to <em>http://localhost:4000</em>. The application is rendering using Typescript.</li>
 
 <p><img src="./media/InstallationAndSetup-16.jpg" alt="App with images"></p>
 </ol>
 </ol>
-
-<p>Continue... 1:32:00</p>
-
 
 <p class="credit">
 <a href="https://www.youtube.com/watch?v=TOb1c39m64A" target="_blank">Webpack 5 Full Project Setup</a>
@@ -1464,7 +1461,7 @@ npm run start
 <br/><a href="https://stackoverflow.com/questions/43638454/webpack-typescript-image-import" target="_blank">stack overflow - Webpack & Typescript image import</a>
 <br/><a href="https://survivejs.com/webpack/loading/images/" target="_blank">Loading Images</a>
 <br/><a href="https://stackoverflow.com/questions/66580334/preserve-subdirectories-in-webpack-5" target="_blank">Preserve subdirectories in webpack 5</a>
-<br/>Last revised: 7/20/2022
+<br/>Last revised: 7/21/2022
 </p>
 </body>
 </html>

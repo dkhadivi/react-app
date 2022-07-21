@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/app.css">
+    <title>Deploy to Netlify</title>
+</head>
+<body>
+
+<h1>Deploy to Netlify<span>React App</span></h1>
+
+<p>Let's deploy our website to Netlify and host it there.</p>
+
+<ol>
+    <li>Login to Netlify. I signed up and logged in.</li>
+
+    <li>Select <em>Sites</em> then click <em>Import from Git</em></li>
+
+    <p><img src="./media/Deploy-Netlify-01.jpg" alt="Deploy the Netlify"></p>
+
+    <li>Click <em>GitHub</em> to connect to GitHub.</li>
+
+    <p><img src="./media/Deploy-Netlify-02.jpg" alt="Deploy the Netlify"></p>
+
+    <li>Click the arrow next to <em>dkhadivi</em>.</li>
+
+    <p><img src="./media/Deploy-Netlify-03.jpg" alt="Deploy the Netlify"></p>
+
+    <li>Select <em>Only select repositories</em>, click <em>Select repositories</em> then <em>dkhadivi/react-app</em>. Click <em>Install</em> at the bottom on the page (not shown).</li>
+
+    <p><img src="./media/Deploy-Netlify-04.jpg" alt="Deploy the Netlify"></p>
+
+    <li>You're prompted for your GitHub password. Enter it and click <em>Confirm password</em>.</li>
+
+    <p><img src="./media/Deploy-Netlify-05.jpg" alt="Deploy the Netlify"></p>
+
+    <li>The page closes. The main page shows the selected repository. Click on the repository.</li>
+
+    <p><img src="./media/Deploy-Netlify-06.jpg" alt="Deploy the Netlify"></p>
+
+    <li>The following page is displayed. The <em>Owner</em> and <em>Brach to deploy</em> are populated automatically. Type <em>build-prod</em>, which is the production build script in the <em>package.json</em> file for production build for <em>Build command</em>. Type <em>dist/</em> for <em>Publish directory</em>. Click <em>Deploy site</em>.</li>
+
+    <p><img src="./media/Deploy-Netlify-06.jpg" alt="Deploy the Netlify"></p>
+
+    <li>Wait for the site to deploy.</li>
+
+    <p><img src="./media/Deploy-Netlify-07.jpg" alt="Deploy the Netlify"></p>
+
+    <p>Netlify adds continuous integration for our deployed site. This means that every time you push to the <em>main</em> branch, Netlify will auto-deploy a new version of the website. It will build the site. If there are any errors, it will not host it, so it won't break your current website. If the build produces no errors, then it will replace the current website with the newly-build one.</p>
+</ol>
+
+<p class="credit">
+<a href="https://www.youtube.com/watch?v=TOb1c39m64A" target="_blank">Webpack 5 Full Project Setup</a>
+Last revised: 7/21/2022
+</p>
+</body>
+</html>
